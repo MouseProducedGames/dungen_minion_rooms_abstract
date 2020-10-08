@@ -5,8 +5,8 @@ authors = ["MouseProducedGames <largemouse@gmail.com>"]
 edition = "2018"
 license-file = "LICENSE"
 description = "Abstract room support for dungen_minion."
-homepage = "https://github.com/MouseProducedGames/dungen_minion_geometry"
-repository = "https://github.com/MouseProducedGames/dungen_minion_geometry"
+homepage = "https://github.com/MouseProducedGames/dungen_minion_rooms_abstract"
+repository = "https://github.com/MouseProducedGames/dungen_minion_rooms_abstract"
 readme = "readme.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
