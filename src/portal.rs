@@ -9,12 +9,12 @@ use crate::geometry::{HasLocalPosition, LocalPosition};
 #[derive(Copy, Clone)]
 pub struct Portal<'a> {
     local: LocalPosition,
-    other: &'a dyn PlacedRoom<'a>,
+    target: &'a dyn PlacedRoom<'a>,
 }
 
 impl<'a> Portal<'a> {
-    fn other(&'a self) -> &'a dyn PlacedRoom<'a> {
-        self.other
+    fn target(&'a self) -> &'a dyn PlacedRoom<'a> {
+        self.target
     }
 }
 
