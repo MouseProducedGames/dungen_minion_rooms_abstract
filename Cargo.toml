@@ -3,10 +3,15 @@ name = "dungen_minion_rooms_abstract"
 version = "0.1.0"
 authors = ["MouseProducedGames <largemouse@gmail.com>"]
 edition = "2018"
+license-file = "LICENSE"
+description = "Abstract room support for dungen_minion."
+homepage = "https://github.com/MouseProducedGames/dungen_minion_geometry"
+repository = "https://github.com/MouseProducedGames/dungen_minion_geometry"
+readme = "readme.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 derive_more = "0.99.11"
-dungen_minion_geometry = { path = "../dungen_minion_geometry" }
+dungen_minion_geometry = "0.1.0"
 num-traits = "0.2"
