@@ -6,11 +6,11 @@
 use super::Room;
 
 pub struct DunGen<'a> {
-    map: &'a mut dyn Room,
+    map: &'a mut dyn Room<'a>,
 }
 
 impl<'a> DunGen<'a> {
-    fn build(&'a mut self) -> &'a dyn Room {
+    fn build(&'a mut self) -> &'a dyn Room<'a> {
         self.map
     }
 }

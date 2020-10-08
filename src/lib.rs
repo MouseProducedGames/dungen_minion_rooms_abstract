@@ -19,12 +19,14 @@ mod placed_room;
 mod placed_shape;
 mod portal;
 mod portals;
+mod portals_mut;
 mod position;
 mod room;
 mod shape;
 mod size;
 mod sub_room;
 mod sub_rooms;
+mod sub_rooms_mut;
 mod tile_type;
 
 pub use area::Area;
@@ -43,12 +45,14 @@ pub use placed_room::PlacedRoom;
 pub use placed_shape::PlacedShape;
 pub use portal::Portal;
 pub use portals::Portals;
+pub use portals_mut::PortalsMut;
 pub use position::Position;
 pub use room::Room;
 pub use shape::Shape;
 pub use size::Size;
 pub use sub_room::SubRoom;
 pub use sub_rooms::SubRooms;
+pub use sub_rooms_mut::SubRoomsMut;
 pub use tile_type::TileType;
 
 #[cfg(test)]

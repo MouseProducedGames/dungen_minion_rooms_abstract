@@ -6,13 +6,21 @@ use std::ops::{Add, Sub};
 // Internal includes.
 use super::{HasLocalPosition, Length};
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LocalPosition {
     x: Length,
     y: Length,
 }
 
 impl LocalPosition {
+    pub fn x(&self) -> Length {
+        self.x
+    }
+
+    pub fn y(&self) -> Length {
+        self.y
+    }
+
     pub fn new(x: Length, y: Length) -> Self {
         Self { x, y }
     }
@@ -31,6 +39,10 @@ impl Add for LocalPosition {
 
 impl HasLocalPosition for LocalPosition {
     fn local(&self) -> &Self {
+        self
+    }
+
+    fn local_mut(&mut self) -> &mut Self {
         self
     }
 }

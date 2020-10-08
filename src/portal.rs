@@ -8,11 +8,11 @@ use super::{HasLocalPosition, LocalPosition, Room};
 #[derive(Copy, Clone)]
 pub struct Portal<'a> {
     local: LocalPosition,
-    other: &'a dyn Room,
+    other: &'a dyn Room<'a>,
 }
 
 impl<'a> Portal<'a> {
-    fn other(&'a self) -> &'a dyn Room {
+    fn other(&'a self) -> &'a dyn Room<'a> {
         self.other
     }
 }
@@ -20,5 +20,9 @@ impl<'a> Portal<'a> {
 impl<'a> HasLocalPosition for Portal<'a> {
     fn local(&self) -> &LocalPosition {
         &self.local
+    }
+
+    fn local_mut(&mut self) -> &mut LocalPosition {
+        &mut self.local
     }
 }

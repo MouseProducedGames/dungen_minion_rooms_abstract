@@ -6,13 +6,21 @@ use std::ops::{Add, Sub};
 // Internal includes.
 use super::{Coord, HasPosition};
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct Position {
     x: Coord,
     y: Coord,
 }
 
 impl Position {
+    pub fn x(&self) -> Coord {
+        self.x
+    }
+
+    pub fn y(&self) -> Coord {
+        self.y
+    }
+
     pub fn new(x: Coord, y: Coord) -> Self {
         Self { x, y }
     }
@@ -31,6 +39,10 @@ impl Add for Position {
 
 impl HasPosition for Position {
     fn pos(&self) -> &Self {
+        self
+    }
+
+    fn pos_mut(&mut self) -> &mut Self {
         self
     }
 }

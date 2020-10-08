@@ -6,14 +6,20 @@
 use super::SubRoom;
 
 pub struct SubRooms<'a> {
-    values: &'a Vec<SubRoom<'a>>,
+    values: &'a [SubRoom<'a>],
+}
+
+impl<'a> SubRooms<'a> {
+    pub fn new(values: &'a [SubRoom<'a>]) -> Self {
+        Self { values }
+    }
 }
 
 impl<'a> IntoIterator for SubRooms<'a> {
-    type Item = SubRoom<'a>;
-    type IntoIter = std::iter::Copied<std::slice::Iter<'a, Self::Item>>;
+    type Item = &'a SubRoom<'a>;
+    type IntoIter = std::slice::Iter<'a, SubRoom<'a>>;
 
     fn into_iter(self) -> Self::IntoIter {
-        self.values.iter().copied()
+        self.values.iter()
     }
 }
