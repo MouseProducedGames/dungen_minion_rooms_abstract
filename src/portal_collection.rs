@@ -7,7 +7,7 @@ use super::{PlacedRoom, Portal};
 use crate::geometry::LocalPosition;
 
 pub trait PortalCollection<'a> {
-    fn add_portal(&mut self, local: LocalPosition, target: &dyn PlacedRoom<'a>);
+    fn add_portal(&mut self, local: LocalPosition, target: &'static dyn PlacedRoom<'a>);
 
     fn get_portal_at(&self, index: usize) -> Option<&Portal<'a>>;
 

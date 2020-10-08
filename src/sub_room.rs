@@ -13,7 +13,11 @@ pub struct SubRoom<'a> {
 }
 
 impl<'a> SubRoom<'a> {
-    fn value(&'a self) -> &'a dyn Room<'a> {
+    pub fn new(local: LocalPosition, value: &'a dyn Room<'a>) -> Self {
+        Self { local, value }
+    }
+    
+    pub fn value(&'a self) -> &'a dyn Room<'a> {
         self.value
     }
 }

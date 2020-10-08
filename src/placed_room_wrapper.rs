@@ -79,6 +79,25 @@ impl<'a> PlacedShape for PlacedRoomWrapper<'a> {}
 
 impl<'a> PlacedObject for PlacedRoomWrapper<'a> {}
 
+impl<'a> PortalCollection<'a> for PlacedRoomWrapper<'a>
+{
+    fn add_portal(&mut self, local: LocalPosition, target: &'static dyn PlacedRoom<'a>) {
+        Room::add_portal(self, local, target)
+    }
+
+    fn get_portal_at(&self, index: usize) -> Option<&Portal<'a>> {
+        Room::get_portal_at(self, index)
+    }
+
+    fn get_portal_at_mut(&mut self, index: usize) -> Option<&mut Portal<'a>> {
+        Room::get_portal_at_mut(self, index)
+    }
+
+    fn portal_count(&self) -> usize {
+        Room::portal_count(self)
+    }
+}
+
 impl<'a> Room<'a> for PlacedRoomWrapper<'a> {
     fn portals(&'a self) -> Portals<'a> {
         self.room.portals()
@@ -115,6 +134,25 @@ impl<'a> Room<'a> for PlacedRoomWrapper<'a> {
 }
 
 impl<'a> Shape for PlacedRoomWrapper<'a> {}
+
+impl<'a> SubRoomCollection<'a> for PlacedRoomWrapper<'a>
+{
+    fn add_sub_room(&mut self, local: LocalPosition, target: &'static dyn Room<'a>) {
+        Room::add_sub_room(self, local, target)
+    }
+
+    fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom<'a>> {
+        Room::get_sub_room_at(self, index)
+    }
+
+    fn get_sub_room_at_mut(&mut self, index: usize) -> Option<&mut SubRoom<'a>> {
+        Room::get_sub_room_at_mut(self, index)
+    }
+
+    fn sub_room_count(&self) -> usize {
+        Room::sub_room_count(self)
+    }
+}
 
 impl<'a> HasSize for PlacedRoomWrapper<'a> {
     fn size(&self) -> &Size {

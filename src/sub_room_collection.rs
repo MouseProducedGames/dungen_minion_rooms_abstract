@@ -7,7 +7,7 @@ use super::{Room, SubRoom};
 use crate::geometry::LocalPosition;
 
 pub trait SubRoomCollection<'a> {
-    fn add_sub_room(&mut self, local: LocalPosition, target: &dyn Room<'a>);
+    fn add_sub_room(&mut self, local: LocalPosition, target: &'static dyn Room<'a>);
 
     fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom<'a>>;
 

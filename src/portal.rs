@@ -13,6 +13,10 @@ pub struct Portal<'a> {
 }
 
 impl<'a> Portal<'a> {
+    pub fn new(local: LocalPosition, target: &'a dyn PlacedRoom<'a>) -> Self {
+        Self { local, target }
+    }
+    
     fn target(&'a self) -> &'a dyn PlacedRoom<'a> {
         self.target
     }
