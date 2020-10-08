@@ -4,7 +4,7 @@
 use std::ops::{Index, IndexMut};
 
 // Internal includes.
-use super::{Room, TileType};
+use super::{Portal, PortalCollection, Room, SubRoom, SubRoomCollection, TileType};
 use crate::geometry::*;
 
 pub trait PlacedRoom<'a>: PlacedShape + Room<'a> {
@@ -26,6 +26,48 @@ pub trait PlacedRoom<'a>: PlacedShape + Room<'a> {
             let local_pos = LocalPosition::new(pos.x() as Length, pos.y() as Length);
             self.tile_type_at_local_mut(local_pos)
         }
+    }
+}
+
+impl<'a, TPlacedRoom> SubRoomCollection<'a> for TPlacedRoom
+where
+    TPlacedRoom: PlacedRoom<'a>,
+{
+    fn add_sub_room(&mut self, local: LocalPosition, target: &dyn Room<'a>) {
+        Room::add_sub_room(self, local, target)
+    }
+
+    fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom<'a>> {
+        Room::get_sub_room_at(self, index)
+    }
+
+    fn get_sub_room_at_mut(&mut self, index: usize) -> Option<&mut SubRoom<'a>> {
+        Room::get_sub_room_at_mut(self, index)
+    }
+
+    fn sub_room_count(&self) -> usize {
+        Room::sub_room_count(self)
+    }
+}
+
+impl<'a, TPlacedRoom> PortalCollection<'a> for TPlacedRoom
+where
+    TPlacedRoom: PlacedRoom<'a>,
+{
+    fn add_portal(&mut self, local: LocalPosition, target: &dyn PlacedRoom<'a>) {
+        Room::add_portal(self, local, target)
+    }
+
+    fn get_portal_at(&self, index: usize) -> Option<&Portal<'a>> {
+        Room::get_portal_at(self, index)
+    }
+
+    fn get_portal_at_mut(&mut self, index: usize) -> Option<&mut Portal<'a>> {
+        Room::get_portal_at_mut(self, index)
+    }
+
+    fn portal_count(&self) -> usize {
+        Room::portal_count(self)
     }
 }
 
