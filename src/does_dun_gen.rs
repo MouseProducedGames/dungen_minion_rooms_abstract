@@ -6,7 +6,7 @@
 use super::SupportsDunGen;
 
 pub trait DoesDunGen<'a> {
-    fn dun_gen<'b>(&'a self, target: &mut dyn SupportsDunGen<'b>);
+    fn dun_gen<'b>(&self, target: &mut dyn SupportsDunGen<'b>);
 }
 
 pub trait DoesDunGenStatic<'a> {

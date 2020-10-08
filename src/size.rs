@@ -12,6 +12,10 @@ pub struct Size {
 }
 
 impl Size {
+    pub fn new(width: Length, height: Length) -> Self {
+        Self { height, width }
+    }
+
     pub fn height(&self) -> Length {
         self.height
     }
