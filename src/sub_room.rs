@@ -9,12 +9,12 @@ use crate::geometry::{HasLocalPosition, LocalPosition};
 #[derive(Copy, Clone)]
 pub struct SubRoom<'a> {
     local: LocalPosition,
-    other: &'a dyn Room<'a>,
+    value: &'a dyn Room<'a>,
 }
 
 impl<'a> SubRoom<'a> {
-    fn other(&'a self) -> &'a dyn Room<'a> {
-        self.other
+    fn value(&'a self) -> &'a dyn Room<'a> {
+        self.value
     }
 }
 
