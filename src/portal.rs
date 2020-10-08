@@ -3,17 +3,17 @@
 // Standard includes.
 
 // Internal includes.
-use super::Room;
+use super::PlacedRoom;
 use crate::geometry::{HasLocalPosition, LocalPosition};
 
 #[derive(Copy, Clone)]
 pub struct Portal<'a> {
     local: LocalPosition,
-    other: &'a dyn Room<'a>,
+    other: &'a dyn PlacedRoom<'a>,
 }
 
 impl<'a> Portal<'a> {
-    fn other(&'a self) -> &'a dyn Room<'a> {
+    fn other(&'a self) -> &'a dyn PlacedRoom<'a> {
         self.other
     }
 }
