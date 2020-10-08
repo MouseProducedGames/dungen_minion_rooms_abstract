@@ -17,8 +17,16 @@ impl LocalPosition {
         self.x
     }
 
+    pub fn x_mut(&mut self) -> &mut Length {
+        &mut self.x
+    }
+
     pub fn y(&self) -> Length {
         self.y
+    }
+
+    pub fn y_mut(&mut self) -> &mut Length {
+        &mut self.y
     }
 
     pub fn new(x: Length, y: Length) -> Self {

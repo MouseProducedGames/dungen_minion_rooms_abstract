@@ -3,10 +3,38 @@
 // Standard includes.
 
 // Internal includes.
-use super::Length;
+use super::{HasSize, Length};
 
-pub trait Size {
-    fn height(&self) -> Length;
+#[derive(Copy, Clone, Debug)]
+pub struct Size {
+    height: Length,
+    width: Length,
+}
 
-    fn width(&self) -> Length;
+impl Size {
+    pub fn height(&self) -> Length {
+        self.height
+    }
+
+    pub fn height_mut(&mut self) -> &mut Length {
+        &mut self.height
+    }
+
+    pub fn width(&self) -> Length {
+        self.width
+    }
+
+    pub fn width_mut(&mut self) -> &mut Length {
+        &mut self.width
+    }
+}
+
+impl HasSize for Size {
+    fn size(&self) -> &Self {
+        self
+    }
+
+    fn size_mut(&mut self) -> &mut Self {
+        self
+    }
 }

@@ -3,6 +3,6 @@
 // Standard includes.
 
 // Internal includes.
-use super::{IntersectsLocalPos, Size};
+use super::{HasSize, IntersectsLocalPos};
 
-pub trait Shape: IntersectsLocalPos + Size {}
+pub trait Shape: IntersectsLocalPos + HasSize {}

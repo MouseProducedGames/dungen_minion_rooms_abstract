@@ -5,9 +5,11 @@
 // Internal includes.
 mod area;
 mod defines;
-mod dun_gen;
+mod does_dun_gen;
+mod has_area;
 mod has_local_position;
 mod has_position;
+mod has_size;
 mod intersects;
 mod intersects_local;
 mod intersects_local_pos;
@@ -27,13 +29,16 @@ mod size;
 mod sub_room;
 mod sub_rooms;
 mod sub_rooms_mut;
+mod supports_dun_gen;
 mod tile_type;
 
 pub use area::Area;
 pub use defines::{Coord, Length};
-pub use dun_gen::DunGen;
+pub use does_dun_gen::{DoesDunGen, DoesDunGenStatic};
+pub use has_area::HasArea;
 pub use has_local_position::HasLocalPosition;
 pub use has_position::HasPosition;
+pub use has_size::HasSize;
 pub use intersects::Intersects;
 pub use intersects_local::IntersectsLocal;
 pub use intersects_local_pos::IntersectsLocalPos;
@@ -53,6 +58,7 @@ pub use size::Size;
 pub use sub_room::SubRoom;
 pub use sub_rooms::SubRooms;
 pub use sub_rooms_mut::SubRoomsMut;
+pub use supports_dun_gen::SupportsDunGen;
 pub use tile_type::TileType;
 
 #[cfg(test)]

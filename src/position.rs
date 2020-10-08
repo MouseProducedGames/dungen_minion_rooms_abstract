@@ -17,8 +17,16 @@ impl Position {
         self.x
     }
 
+    pub fn x_mut(&mut self) -> &mut Coord {
+        &mut self.x
+    }
+
     pub fn y(&self) -> Coord {
         self.y
+    }
+
+    pub fn y_mut(&mut self) -> &mut Coord {
+        &mut self.y
     }
 
     pub fn new(x: Coord, y: Coord) -> Self {

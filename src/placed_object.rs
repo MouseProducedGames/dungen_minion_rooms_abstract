@@ -3,6 +3,6 @@
 // Standard includes.
 
 // Internal includes.
-use super::{Area, Placed};
+use super::{HasArea, Placed};
 
-pub trait PlacedObject: Area + Placed {}
+pub trait PlacedObject: HasArea + Placed {}

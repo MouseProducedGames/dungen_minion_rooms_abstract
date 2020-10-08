@@ -6,6 +6,7 @@
 
 #[derive(Copy, Clone, Debug)]
 pub enum TileType {
+    Void,
     Wall,
     Floor,
     Portal,
