@@ -1,4 +1,7 @@
 // External includes.
+pub mod geometry {
+    pub use dungen_minion_geometry::*;
+}
 
 // Standard includes.
 
@@ -14,10 +17,6 @@ mod sub_rooms;
 mod sub_rooms_mut;
 mod supports_dun_gen;
 mod tile_type;
-
-pub mod geometry {
-    pub use generic_dungen_geometry::*;
-}
 
 pub use does_dun_gen::{DoesDunGen, DoesDunGenStatic};
 pub use placed_room::PlacedRoom;
