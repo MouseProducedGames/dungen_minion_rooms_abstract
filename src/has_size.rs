@@ -3,7 +3,7 @@
 // Standard includes.
 
 // Internal includes.
-use super::{Length, Size};
+use super::Size;
 
 pub trait HasSize {
     fn size(&self) -> &Size;
