@@ -17,7 +17,7 @@ impl<'a> Portal<'a> {
         Self { local, target }
     }
     
-    fn target(&'a self) -> &'a dyn PlacedRoom<'a> {
+    pun fn target(&'a self) -> &'a dyn PlacedRoom<'a> {
         self.target
     }
 }
