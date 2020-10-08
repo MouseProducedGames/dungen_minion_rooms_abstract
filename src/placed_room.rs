@@ -4,7 +4,8 @@
 use std::ops::{Index, IndexMut};
 
 // Internal includes.
-use super::{Length, LocalPosition, PlacedShape, Position, Room, TileType};
+use super::{Room, TileType};
+use crate::geometry::{Length, LocalPosition, PlacedShape, Position};
 
 pub trait PlacedRoom<'a>: PlacedShape + Room<'a> {
     fn tile_type_at(&self, pos: Position) -> Option<&TileType> {

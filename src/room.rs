@@ -4,9 +4,8 @@
 use std::ops::{Index, IndexMut};
 
 // Internal includes.
-use super::{
-    HasLocalPosition, LocalPosition, Portals, PortalsMut, Shape, SubRooms, SubRoomsMut, TileType,
-};
+use super::{Portals, PortalsMut, SubRooms, SubRoomsMut, TileType};
+use crate::geometry::{HasLocalPosition, LocalPosition, Shape};
 
 pub trait Room<'a>: HasLocalPosition + Shape {
     fn portals(&'a self) -> Portals<'a>;

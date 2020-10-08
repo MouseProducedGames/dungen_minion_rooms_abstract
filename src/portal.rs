@@ -3,7 +3,8 @@
 // Standard includes.
 
 // Internal includes.
-use super::{HasLocalPosition, LocalPosition, Room};
+use super::Room;
+use crate::geometry::{HasLocalPosition, LocalPosition};
 
 #[derive(Copy, Clone)]
 pub struct Portal<'a> {
