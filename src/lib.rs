@@ -8,6 +8,7 @@ pub mod geometry {
 // Internal includes.
 mod does_dun_gen;
 mod placed_room;
+mod placed_room_wrapper;
 mod portal;
 mod portals;
 mod portals_mut;
