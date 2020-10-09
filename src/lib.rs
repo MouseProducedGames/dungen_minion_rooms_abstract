@@ -1,3 +1,6 @@
+#![warn(missing_docs)]
+#![warn(missing_doc_code_examples)]
+
 // External includes.
 pub mod geometry {
     pub use dungen_minion_geometry::*;

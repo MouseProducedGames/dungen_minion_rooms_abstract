@@ -5,11 +5,26 @@
 // Internal includes.
 use super::SubRoom;
 
+/// An iterator over immutable references to [`SubRoom`](struct.SubRoom.html).
+///
+/// The following is a basic example of abstracted functionality.
+/// ```
+/// # use dungen_minion_rooms_abstract::*;
+/// # use dungen_minion_rooms_abstract::geometry::*;
+/// # let sub_rooms_source = Vec::<SubRoom>::new();
+/// let mut local_positions = Vec::new();
+/// let sub_rooms = SubRooms::new(&sub_rooms_source);
+/// for sub_room in sub_rooms {
+///     // Store the local position of each `SubRoom`.
+///     local_positions.push(*sub_room.local());
+/// }
+/// ```
 pub struct SubRooms<'a> {
     values: &'a [SubRoom],
 }
 
 impl<'a> SubRooms<'a> {
+    /// Creates a new immutable `SubRoom` iterator.
     pub fn new(values: &'a [SubRoom]) -> Self {
         Self { values }
     }
