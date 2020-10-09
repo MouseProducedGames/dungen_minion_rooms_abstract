@@ -85,8 +85,13 @@ impl PlacedShape for PlacedRoomWrapper {}
 impl PlacedObject for PlacedRoomWrapper {}
 
 impl PortalCollection for PlacedRoomWrapper {
-    fn add_portal(&mut self, local: LocalPosition, target: Box<dyn PlacedRoom>) {
-        Room::add_portal(self, local, target)
+    fn add_portal(
+        &mut self,
+        local: LocalPosition,
+        portal_to_room_facing: OrdinalDirection,
+        target: Box<dyn PlacedRoom>,
+    ) {
+        Room::add_portal(self, local, portal_to_room_facing, target)
     }
 
     fn get_portal_at(&self, index: usize) -> Option<&Portal> {

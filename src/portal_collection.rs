@@ -4,10 +4,15 @@
 
 // Internal includes.
 use super::{PlacedRoom, Portal};
-use crate::geometry::LocalPosition;
+use crate::geometry::*;
 
 pub trait PortalCollection {
-    fn add_portal(&mut self, local: LocalPosition, target: Box<dyn PlacedRoom>);
+    fn add_portal(
+        &mut self,
+        local: LocalPosition,
+        portal_to_room_facing: OrdinalDirection,
+        target: Box<dyn PlacedRoom>,
+    );
 
     fn get_portal_at(&self, index: usize) -> Option<&Portal>;
 
