@@ -91,19 +91,19 @@ impl PortalCollection for PlacedRoomWrapper {
         portal_to_room_facing: OrdinalDirection,
         target: Box<dyn PlacedRoom>,
     ) {
-        Room::add_portal(self, local, portal_to_room_facing, target)
+        self.room.add_portal(local, portal_to_room_facing, target)
     }
 
     fn get_portal_at(&self, index: usize) -> Option<&Portal> {
-        Room::get_portal_at(self, index)
+        self.room.get_portal_at(index)
     }
 
     fn get_portal_at_mut(&mut self, index: usize) -> Option<&mut Portal> {
-        Room::get_portal_at_mut(self, index)
+        self.room.get_portal_at_mut(index)
     }
 
     fn portal_count(&self) -> usize {
-        Room::portal_count(self)
+        self.room.portal_count()
     }
 }
 
@@ -132,7 +132,6 @@ impl Room for PlacedRoomWrapper {
     }
 
     fn tile_type_at_local_mut(&mut self, pos: LocalPosition) -> Option<&mut TileType> {
-        *self.room.size_mut() = *self.size();
         self.room.tile_type_at_local_mut(pos)
     }
 
@@ -141,7 +140,8 @@ impl Room for PlacedRoomWrapper {
         pos: LocalPosition,
         tile_type: TileType,
     ) -> Option<TileType> {
-        *self.room.size_mut() = *self.size();
+        *self.area.size_mut().height_mut() = self.area.size().height().max(pos.y() + 1);
+        *self.area.size_mut().width_mut() = self.area.size().width().max(pos.x() + 1);
         self.room.tile_type_at_local_set(pos, tile_type)
     }
 }
@@ -150,28 +150,28 @@ impl Shape for PlacedRoomWrapper {}
 
 impl SubRoomCollection for PlacedRoomWrapper {
     fn add_sub_room(&mut self, local: LocalPosition, target: Box<dyn Room>) {
-        Room::add_sub_room(self, local, target)
+        self.room.add_sub_room(local, target)
     }
 
     fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom> {
-        Room::get_sub_room_at(self, index)
+        self.room.get_sub_room_at(index)
     }
 
     fn get_sub_room_at_mut(&mut self, index: usize) -> Option<&mut SubRoom> {
-        Room::get_sub_room_at_mut(self, index)
+        self.room.get_sub_room_at_mut(index)
     }
 
     fn sub_room_count(&self) -> usize {
-        Room::sub_room_count(self)
+        self.room.sub_room_count()
     }
 }
 
 impl HasSize for PlacedRoomWrapper {
     fn size(&self) -> &Size {
-        self.area.size()
+        self.room.size()
     }
 
     fn size_mut(&mut self) -> &mut Size {
-        self.area.size_mut()
+        self.room.size_mut()
     }
 }

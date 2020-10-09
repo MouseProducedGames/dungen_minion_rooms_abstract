@@ -26,6 +26,7 @@ mod tile_type;
 pub use does_dun_gen::{DoesDunGen, DoesDunGenStatic};
 pub use does_dun_gen_placed::{DoesDunGenPlaced, DoesDunGenPlacedStatic};
 pub use placed_room::PlacedRoom;
+pub use placed_room_wrapper::PlacedRoomWrapper;
 pub use portal::Portal;
 pub use portal_collection::PortalCollection;
 pub use portals::Portals;
