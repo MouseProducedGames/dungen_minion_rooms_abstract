@@ -6,15 +6,16 @@
 use super::*;
 use crate::geometry::*;
 
-pub struct PlacedRoomWrapper<'a> {
+#[derive(Clone)]
+pub struct PlacedRoomWrapper {
     area: Area,
-    room: Box<dyn Room<'a>>,
+    room: Box<dyn Room>,
 }
 
-impl<'a> PlacedRoomWrapper<'a> {
+impl PlacedRoomWrapper {
     pub fn new<TRoom: 'static>(pos: Position, room: TRoom) -> Self
     where
-        TRoom: Room<'a>,
+        TRoom: Room,
     {
         Self {
             area: Area::new(pos, *room.size()),
@@ -23,7 +24,7 @@ impl<'a> PlacedRoomWrapper<'a> {
     }
 }
 
-impl<'a> HasLocalPosition for PlacedRoomWrapper<'a> {
+impl HasLocalPosition for PlacedRoomWrapper {
     fn local(&self) -> &LocalPosition {
         self.room.local()
     }
@@ -33,7 +34,7 @@ impl<'a> HasLocalPosition for PlacedRoomWrapper<'a> {
     }
 }
 
-impl<'a> HasArea for PlacedRoomWrapper<'a> {
+impl HasArea for PlacedRoomWrapper {
     fn area(&self) -> &Area {
         &self.area
     }
@@ -43,7 +44,7 @@ impl<'a> HasArea for PlacedRoomWrapper<'a> {
     }
 }
 
-impl<'a> HasPosition for PlacedRoomWrapper<'a> {
+impl HasPosition for PlacedRoomWrapper {
     fn pos(&self) -> &Position {
         self.area.pos()
     }
@@ -53,13 +54,13 @@ impl<'a> HasPosition for PlacedRoomWrapper<'a> {
     }
 }
 
-impl<'a> IntersectsLocalPos for PlacedRoomWrapper<'a> {
+impl IntersectsLocalPos for PlacedRoomWrapper {
     fn intersects_local_pos(&self, pos: LocalPosition) -> bool {
         self.room.intersects_local_pos(pos)
     }
 }
 
-impl<'a> IntersectsPos for PlacedRoomWrapper<'a> {
+impl IntersectsPos for PlacedRoomWrapper {
     fn intersects_pos(&self, pos: Position) -> bool {
         let rel_pos = pos - *self.pos();
         if rel_pos.x() < 0 || rel_pos.y() < 0 {
@@ -71,25 +72,28 @@ impl<'a> IntersectsPos for PlacedRoomWrapper<'a> {
     }
 }
 
-impl<'a> Placed for PlacedRoomWrapper<'a> {}
+impl Placed for PlacedRoomWrapper {}
 
-impl<'a> PlacedRoom<'a> for PlacedRoomWrapper<'a> {}
+impl PlacedRoom for PlacedRoomWrapper {
+    fn box_placed_clone(&self) -> Box<dyn PlacedRoom> {
+        Box::new((*self).clone())
+    }
+}
 
-impl<'a> PlacedShape for PlacedRoomWrapper<'a> {}
+impl PlacedShape for PlacedRoomWrapper {}
 
-impl<'a> PlacedObject for PlacedRoomWrapper<'a> {}
+impl PlacedObject for PlacedRoomWrapper {}
 
-impl<'a> PortalCollection<'a> for PlacedRoomWrapper<'a>
-{
-    fn add_portal(&mut self, local: LocalPosition, target: &'static dyn PlacedRoom<'a>) {
+impl PortalCollection for PlacedRoomWrapper {
+    fn add_portal(&mut self, local: LocalPosition, target: Box<dyn PlacedRoom>) {
         Room::add_portal(self, local, target)
     }
 
-    fn get_portal_at(&self, index: usize) -> Option<&Portal<'a>> {
+    fn get_portal_at(&self, index: usize) -> Option<&Portal> {
         Room::get_portal_at(self, index)
     }
 
-    fn get_portal_at_mut(&mut self, index: usize) -> Option<&mut Portal<'a>> {
+    fn get_portal_at_mut(&mut self, index: usize) -> Option<&mut Portal> {
         Room::get_portal_at_mut(self, index)
     }
 
@@ -98,19 +102,23 @@ impl<'a> PortalCollection<'a> for PlacedRoomWrapper<'a>
     }
 }
 
-impl<'a> Room<'a> for PlacedRoomWrapper<'a> {
-    fn portals(&'a self) -> Portals<'a> {
+impl Room for PlacedRoomWrapper {
+    fn box_clone(&self) -> Box<dyn Room> {
+        Box::new((*self).clone())
+    }
+    
+    fn portals(&self) -> Portals {
         self.room.portals()
     }
-    fn portals_mut(&'a mut self) -> PortalsMut<'a> {
+    fn portals_mut(&mut self) -> PortalsMut {
         self.room.portals_mut()
     }
 
-    fn sub_rooms(&'a self) -> SubRooms<'a> {
+    fn sub_rooms(&self) -> SubRooms {
         self.room.sub_rooms()
     }
 
-    fn sub_rooms_mut(&'a mut self) -> SubRoomsMut<'a> {
+    fn sub_rooms_mut(&mut self) -> SubRoomsMut {
         self.room.sub_rooms_mut()
     }
 
@@ -133,19 +141,18 @@ impl<'a> Room<'a> for PlacedRoomWrapper<'a> {
     }
 }
 
-impl<'a> Shape for PlacedRoomWrapper<'a> {}
+impl Shape for PlacedRoomWrapper {}
 
-impl<'a> SubRoomCollection<'a> for PlacedRoomWrapper<'a>
-{
-    fn add_sub_room(&mut self, local: LocalPosition, target: &'static dyn Room<'a>) {
+impl SubRoomCollection for PlacedRoomWrapper {
+    fn add_sub_room(&mut self, local: LocalPosition, target: Box<dyn Room>) {
         Room::add_sub_room(self, local, target)
     }
 
-    fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom<'a>> {
+    fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom> {
         Room::get_sub_room_at(self, index)
     }
 
-    fn get_sub_room_at_mut(&mut self, index: usize) -> Option<&mut SubRoom<'a>> {
+    fn get_sub_room_at_mut(&mut self, index: usize) -> Option<&mut SubRoom> {
         Room::get_sub_room_at_mut(self, index)
     }
 
@@ -154,7 +161,7 @@ impl<'a> SubRoomCollection<'a> for PlacedRoomWrapper<'a>
     }
 }
 
-impl<'a> HasSize for PlacedRoomWrapper<'a> {
+impl HasSize for PlacedRoomWrapper {
     fn size(&self) -> &Size {
         self.area.size()
     }

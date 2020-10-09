@@ -6,23 +6,28 @@
 use super::PlacedRoom;
 use crate::geometry::{HasLocalPosition, LocalPosition};
 
-#[derive(Copy, Clone)]
-pub struct Portal<'a> {
+#[derive(Clone)]
+pub struct Portal {
     local: LocalPosition,
-    target: &'a dyn PlacedRoom<'a>,
+    target: Box<dyn PlacedRoom>,
 }
 
-impl<'a> Portal<'a> {
-    pub fn new(local: LocalPosition, target: &'a dyn PlacedRoom<'a>) -> Self {
+impl Portal {
+    pub fn new(local: LocalPosition, target: Box<dyn PlacedRoom>) -> Self {
         Self { local, target }
     }
-    
-    pub fn target(&'a self) -> &'a dyn PlacedRoom<'a> {
-        self.target
+
+    #[allow(clippy::borrowed_box)]
+    pub fn target(&self) -> &Box<dyn PlacedRoom> {
+        &self.target
+    }
+
+    pub fn target_mut(&mut self) -> &mut Box<dyn PlacedRoom> {
+        &mut self.target
     }
 }
 
-impl<'a> HasLocalPosition for Portal<'a> {
+impl HasLocalPosition for Portal {
     fn local(&self) -> &LocalPosition {
         &self.local
     }

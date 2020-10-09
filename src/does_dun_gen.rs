@@ -3,12 +3,16 @@
 // Standard includes.
 
 // Internal includes.
-use super::SupportsDunGen;
+use super::{Room, SupportsDunGen};
 
-pub trait DoesDunGen<'a> {
-    fn dun_gen<'b>(&self, target: &mut dyn SupportsDunGen<'b>);
+pub trait DoesDunGen {
+    fn dun_gen(&self, target: &mut dyn SupportsDunGen);
+
+    fn dun_gen_map(&self, map: &mut Box<dyn Room>);
 }
 
-pub trait DoesDunGenStatic<'a> {
-    fn dun_gen_static<'b>(target: &mut dyn SupportsDunGen<'b>);
+pub trait DoesDunGenStatic {
+    fn dun_gen_static(target: &mut dyn SupportsDunGen);
+
+    fn dun_gen_map_static(map: &mut Box<dyn Room>);
 }

@@ -6,23 +6,28 @@
 use super::Room;
 use crate::geometry::{HasLocalPosition, LocalPosition};
 
-#[derive(Copy, Clone)]
-pub struct SubRoom<'a> {
+#[derive(Clone)]
+pub struct SubRoom {
     local: LocalPosition,
-    value: &'a dyn Room<'a>,
+    value: Box<dyn Room>,
 }
 
-impl<'a> SubRoom<'a> {
-    pub fn new(local: LocalPosition, value: &'a dyn Room<'a>) -> Self {
+impl SubRoom {
+    pub fn new(local: LocalPosition, value: Box<dyn Room>) -> Self {
         Self { local, value }
     }
-    
-    pub fn value(&'a self) -> &'a dyn Room<'a> {
-        self.value
+
+    #[allow(clippy::borrowed_box)]
+    pub fn value(&self) -> &Box<dyn Room> {
+        &self.value
+    }
+
+    pub fn value_mut(&mut self) -> &mut Box<dyn Room> {
+        &mut self.value
     }
 }
 
-impl<'a> HasLocalPosition for SubRoom<'a> {
+impl HasLocalPosition for SubRoom {
     fn local(&self) -> &LocalPosition {
         &self.local
     }

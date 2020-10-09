@@ -7,6 +7,7 @@ pub mod geometry {
 
 // Internal includes.
 mod does_dun_gen;
+mod does_dun_gen_placed;
 mod placed_room;
 mod placed_room_wrapper;
 mod portal;
@@ -19,9 +20,11 @@ mod sub_room_collection;
 mod sub_rooms;
 mod sub_rooms_mut;
 mod supports_dun_gen;
+mod supports_dun_gen_placed;
 mod tile_type;
 
 pub use does_dun_gen::{DoesDunGen, DoesDunGenStatic};
+pub use does_dun_gen_placed::{DoesDunGenPlaced, DoesDunGenPlacedStatic};
 pub use placed_room::PlacedRoom;
 pub use portal::Portal;
 pub use portal_collection::PortalCollection;
@@ -33,6 +36,7 @@ pub use sub_room_collection::SubRoomCollection;
 pub use sub_rooms::SubRooms;
 pub use sub_rooms_mut::SubRoomsMut;
 pub use supports_dun_gen::SupportsDunGen;
+pub use supports_dun_gen_placed::SupportsDunGenPlaced;
 pub use tile_type::TileType;
 
 #[cfg(test)]

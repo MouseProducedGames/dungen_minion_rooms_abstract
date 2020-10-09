@@ -6,18 +6,18 @@
 use super::Portal;
 
 pub struct PortalsMut<'a> {
-    values: &'a mut [Portal<'a>],
+    values: &'a mut [Portal],
 }
 
 impl<'a> PortalsMut<'a> {
-    pub fn new(values: &'a mut [Portal<'a>]) -> Self {
+    pub fn new(values: &'a mut [Portal]) -> Self {
         Self { values }
     }
 }
 
 impl<'a> IntoIterator for PortalsMut<'a> {
-    type Item = &'a mut Portal<'a>;
-    type IntoIter = std::slice::IterMut<'a, Portal<'a>>;
+    type Item = &'a mut Portal;
+    type IntoIter = std::slice::IterMut<'a, Portal>;
 
     fn into_iter(self) -> Self::IntoIter {
         self.values.iter_mut()
