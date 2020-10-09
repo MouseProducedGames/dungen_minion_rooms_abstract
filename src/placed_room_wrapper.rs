@@ -6,6 +6,7 @@
 use super::*;
 use crate::geometry::*;
 
+/// A wrapper which turns a [`Room`](trait.Room.html) into a [`PlacedRoom`](trait.PlacedRoom.html).
 #[derive(Clone)]
 pub struct PlacedRoomWrapper {
     area: Area,
@@ -13,6 +14,7 @@ pub struct PlacedRoomWrapper {
 }
 
 impl PlacedRoomWrapper {
+    /// Creates a new `PlacedRoomWrapper` from a given `Position` and `Room`.
     pub fn new<TRoom: 'static>(pos: Position, room: TRoom) -> Self
     where
         TRoom: Room,

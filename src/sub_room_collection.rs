@@ -6,9 +6,9 @@
 use super::{Room, SubRoom};
 use crate::geometry::LocalPosition;
 
-/// The defining trait of a type that has a collection of [`SubRoom`](trait.SubRoom.html)s.
+/// The defining trait of a type that has a collection of [`SubRoom`](struct.SubRoom.html)s.
 pub trait SubRoomCollection {
-    /// Adds a `SubRoom` at a given [`LocalPosition`](geometry/struct.LocalPosition.html).
+    /// Adds a `SubRoom` at a given `LocalPosition`.
     fn add_sub_room(&mut self, local: LocalPosition, target: Box<dyn Room>);
 
     /// Gets an `Option` on an immutable reference to a `SubRoom`; returns None if the index is out of range.
