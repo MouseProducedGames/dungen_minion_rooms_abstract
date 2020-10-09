@@ -9,7 +9,7 @@ use crate::geometry::*;
 
 pub trait PlacedRoom: PlacedShape + Room {
     fn box_placed_clone(&self) -> Box<dyn PlacedRoom>;
-    
+
     fn tile_type_at(&self, pos: Position) -> Option<&TileType> {
         let pos = pos - *self.pos();
         if pos.x() < 0 || pos.y() < 0 {

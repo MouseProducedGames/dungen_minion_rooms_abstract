@@ -106,7 +106,7 @@ impl Room for PlacedRoomWrapper {
     fn box_clone(&self) -> Box<dyn Room> {
         Box::new((*self).clone())
     }
-    
+
     fn portals(&self) -> Portals {
         self.room.portals()
     }
