@@ -30,7 +30,7 @@ pub trait PlacedRoom: PlacedShape + Room {
     }
 
     /// Gets an option for a mutable reference to the `TileType` at the given `Position`. Returns None if the `Position` is out of bounds, or there is no tile at that location.
-    /// 
+    ///
     /// This method has a default implementation.
     fn tile_type_at_mut(&mut self, pos: Position) -> Option<&mut TileType> {
         let pos = pos - *self.pos();

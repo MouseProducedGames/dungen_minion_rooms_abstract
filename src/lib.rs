@@ -2,7 +2,7 @@
 #![warn(missing_doc_code_examples)]
 
 //! Defines various map and dungeon generation enums, structs, and traits (mostly traits) for the `dungen_minion` crate.
-//! 
+//!
 //! As the purpose of this crate is to provide traits and helper types for `dungen_minion` and `dungen_minion`'s other dependent crates to consume, the gemeral usages of this crate's traits and helper types are defined here, while their specific implementations are usually defined in those other crates.
 
 // External includes.

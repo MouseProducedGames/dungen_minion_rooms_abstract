@@ -45,7 +45,7 @@ impl Portal {
     pub fn target(&self) -> &Box<dyn PlacedRoom> {
         &self.target
     }
-    
+
     /// Returns a mutable reference to the `Box<dyn PlacedRoom>` portal target.
     pub fn target_mut(&mut self) -> &mut Box<dyn PlacedRoom> {
         &mut self.target
