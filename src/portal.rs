@@ -8,23 +8,23 @@ use crate::geometry::*;
 
 /// Contains information about a [`PlacedRoom`](trait.PlacedRoom.html) that can be reached from this `Portal`.
 ///
-/// `Portal` contains a [`LocalPosition`](geometry/struct.LocalPosition.html), which designates where the `Portal` is on the map the `Portal` originates from, an [`OrdinalDirection`](geometry/enum.OrdinalDirection.html) which designates in which direction the target room faces from the perspective of the portal, and a `Box<dyn PlacedRoom>` target room.
+/// `Portal` contains a [`ShapePosition`](geometry/struct.ShapePosition.html), which designates where the `Portal` is on the map the `Portal` originates from, an [`OrdinalDirection`](geometry/enum.OrdinalDirection.html) which designates in which direction the target room faces from the perspective of the portal, and a `Box<dyn PlacedRoom>` target room.
 #[derive(Clone)]
 pub struct Portal {
-    local: LocalPosition,
+    local_shape_position: ShapePosition,
     portal_to_room_facing: OrdinalDirection,
     target: Box<dyn PlacedRoom>,
 }
 
 impl Portal {
-    /// Creates a new `Portal` at a given `LocalPosition`, where the `PlacedRoom` is facing a specific `OrdinalDirection` from the `Portal`'s perspective.
+    /// Creates a new `Portal` at a given `ShapePosition`, where the `PlacedRoom` is facing a specific `OrdinalDirection` from the `Portal`'s perspective.
     pub fn new(
-        local: LocalPosition,
+        local_shape_position: ShapePosition,
         portal_to_room_facing: OrdinalDirection,
         target: Box<dyn PlacedRoom>,
     ) -> Self {
         Self {
-            local,
+            local_shape_position,
             portal_to_room_facing,
             target,
         }
@@ -52,12 +52,12 @@ impl Portal {
     }
 }
 
-impl HasLocalPosition for Portal {
-    fn local(&self) -> &LocalPosition {
-        &self.local
+impl HasShapePosition for Portal {
+    fn shape_position(&self) -> &ShapePosition {
+        &self.local_shape_position
     }
 
-    fn local_mut(&mut self) -> &mut LocalPosition {
-        &mut self.local
+    fn shape_position_mut(&mut self) -> &mut ShapePosition {
+        &mut self.local_shape_position
     }
 }

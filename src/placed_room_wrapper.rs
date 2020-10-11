@@ -26,13 +26,13 @@ impl PlacedRoomWrapper {
     }
 }
 
-impl HasLocalPosition for PlacedRoomWrapper {
-    fn local(&self) -> &LocalPosition {
-        self.room.local()
+impl HasShapePosition for PlacedRoomWrapper {
+    fn shape_position(&self) -> &ShapePosition {
+        self.room.shape_position()
     }
 
-    fn local_mut(&mut self) -> &mut LocalPosition {
-        self.room.local_mut()
+    fn shape_position_mut(&mut self) -> &mut ShapePosition {
+        self.room.shape_position_mut()
     }
 }
 
@@ -47,30 +47,28 @@ impl HasArea for PlacedRoomWrapper {
 }
 
 impl HasPosition for PlacedRoomWrapper {
-    fn pos(&self) -> &Position {
-        self.area.pos()
+    fn position(&self) -> &Position {
+        self.area.position()
     }
 
-    fn pos_mut(&mut self) -> &mut Position {
-        self.area.pos_mut()
+    fn position_mut(&mut self) -> &mut Position {
+        self.area.position_mut()
     }
 }
 
-impl IntersectsLocalPos for PlacedRoomWrapper {
-    fn intersects_local_pos(&self, pos: LocalPosition) -> bool {
-        self.room.intersects_local_pos(pos)
+impl IntersectsShapePosition for PlacedRoomWrapper {
+    fn intersects_shape_position(&self, pos: ShapePosition) -> bool {
+        if !pos.is_valid_shape_index() {
+            false
+        } else {
+            self.intersects_shape_position(pos)
+        }
     }
 }
 
 impl IntersectsPos for PlacedRoomWrapper {
     fn intersects_pos(&self, pos: Position) -> bool {
-        let rel_pos = pos - *self.pos();
-        if rel_pos.x() < 0 || rel_pos.y() < 0 {
-            false
-        } else {
-            let local = LocalPosition::new(rel_pos.x() as Length, rel_pos.y() as Length);
-            self.intersects_local_pos(local)
-        }
+        self.intersects_shape_position(ShapePosition::from(pos))
     }
 }
 
@@ -89,11 +87,12 @@ impl PlacedObject for PlacedRoomWrapper {}
 impl PortalCollection for PlacedRoomWrapper {
     fn add_portal(
         &mut self,
-        local: LocalPosition,
+        local_shape_position: ShapePosition,
         portal_to_room_facing: OrdinalDirection,
         target: Box<dyn PlacedRoom>,
     ) {
-        self.room.add_portal(local, portal_to_room_facing, target)
+        self.room
+            .add_portal(local_shape_position, portal_to_room_facing, target)
     }
 
     fn get_portal_at(&self, index: usize) -> Option<&Portal> {
@@ -129,30 +128,34 @@ impl Room for PlacedRoomWrapper {
         self.room.sub_rooms_mut()
     }
 
-    fn tile_type_at_local(&self, pos: LocalPosition) -> Option<&TileType> {
+    fn tile_type_at_local(&self, pos: ShapePosition) -> Option<&TileType> {
         self.room.tile_type_at_local(pos)
     }
 
-    fn tile_type_at_local_mut(&mut self, pos: LocalPosition) -> Option<&mut TileType> {
+    fn tile_type_at_local_mut(&mut self, pos: ShapePosition) -> Option<&mut TileType> {
         self.room.tile_type_at_local_mut(pos)
     }
 
     fn tile_type_at_local_set(
         &mut self,
-        pos: LocalPosition,
+        pos: ShapePosition,
         tile_type: TileType,
     ) -> Option<TileType> {
-        *self.area.size_mut().height_mut() = self.area.size().height().max(pos.y() + 1);
-        *self.area.size_mut().width_mut() = self.area.size().width().max(pos.x() + 1);
-        self.room.tile_type_at_local_set(pos, tile_type)
+        if !pos.is_valid_shape_index() {
+            None
+        } else {
+            *self.area.size_mut().height_mut() = self.area.size().height().max(pos.y() as u32 + 1);
+            *self.area.size_mut().width_mut() = self.area.size().width().max(pos.x() as u32 + 1);
+            self.room.tile_type_at_local_set(pos, tile_type)
+        }
     }
 }
 
 impl Shape for PlacedRoomWrapper {}
 
 impl SubRoomCollection for PlacedRoomWrapper {
-    fn add_sub_room(&mut self, local: LocalPosition, target: Box<dyn Room>) {
-        self.room.add_sub_room(local, target)
+    fn add_sub_room(&mut self, local_shape_position: ShapePosition, target: Box<dyn Room>) {
+        self.room.add_sub_room(local_shape_position, target)
     }
 
     fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom> {

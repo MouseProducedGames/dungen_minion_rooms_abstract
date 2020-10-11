@@ -4,21 +4,24 @@
 
 // Internal includes.
 use super::Room;
-use crate::geometry::{HasLocalPosition, LocalPosition};
+use crate::geometry::{HasShapePosition, ShapePosition};
 
 /// Contains information about a [`Room`](trait.Room.html) contanined within, and sub-ordinate to, another `Room`.
 ///
-/// SubRoom contains a [`LocalPosition`](geometry/struct.LocalPosition.html), which designates where the `Room` is in comparison to the containing map, and a `Box<dyn Room>`.
+/// SubRoom contains a [`ShapePosition`](geometry/struct.ShapePosition.html), which designates where the `Room` is in comparison to the containing map, and a `Box<dyn Room>`.
 #[derive(Clone)]
 pub struct SubRoom {
-    local: LocalPosition,
+    local_shape_position: ShapePosition,
     value: Box<dyn Room>,
 }
 
 impl SubRoom {
-    /// Constructs a new `SubRoom` from a `LocalPosition`
-    pub fn new(local: LocalPosition, value: Box<dyn Room>) -> Self {
-        Self { local, value }
+    /// Constructs a new `SubRoom` from a `ShapePosition`
+    pub fn new(local_shape_position: ShapePosition, value: Box<dyn Room>) -> Self {
+        Self {
+            local_shape_position,
+            value,
+        }
     }
 
     #[allow(clippy::borrowed_box)]
@@ -33,12 +36,12 @@ impl SubRoom {
     }
 }
 
-impl HasLocalPosition for SubRoom {
-    fn local(&self) -> &LocalPosition {
-        &self.local
+impl HasShapePosition for SubRoom {
+    fn shape_position(&self) -> &ShapePosition {
+        &self.local_shape_position
     }
 
-    fn local_mut(&mut self) -> &mut LocalPosition {
-        &mut self.local
+    fn shape_position_mut(&mut self) -> &mut ShapePosition {
+        &mut self.local_shape_position
     }
 }

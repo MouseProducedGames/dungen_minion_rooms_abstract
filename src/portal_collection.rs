@@ -8,10 +8,10 @@ use crate::geometry::*;
 
 /// The defining trait of a type that has a collection of [`Portal`](struct.Portal.html)s.
 pub trait PortalCollection {
-    /// Adds a `Portal` at a given `LocalPosition`, where the `PlacedRoom` is facing a specific `OrdinalDirection` from the `Portal`'s perspective.
+    /// Adds a `Portal` at a given `ShapePosition`, where the `PlacedRoom` is facing a specific `OrdinalDirection` from the `Portal`'s perspective.
     fn add_portal(
         &mut self,
-        local: LocalPosition,
+        local_shape_position: ShapePosition,
         portal_to_room_facing: OrdinalDirection,
         target: Box<dyn PlacedRoom>,
     );

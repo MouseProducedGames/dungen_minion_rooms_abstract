@@ -20,12 +20,11 @@ pub trait PlacedRoom: PlacedShape + Room {
     ///
     /// This method has a default implementation.
     fn tile_type_at(&self, pos: Position) -> Option<&TileType> {
-        let pos = pos - *self.pos();
-        if pos.x() < 0 || pos.y() < 0 {
+        let shape_pos = ShapePosition::from(pos);
+        if !shape_pos.is_valid_shape_index() {
             None
         } else {
-            let local_pos = LocalPosition::new(pos.x() as Length, pos.y() as Length);
-            self.tile_type_at_local(local_pos)
+            self.tile_type_at_local(shape_pos)
         }
     }
 
@@ -33,12 +32,11 @@ pub trait PlacedRoom: PlacedShape + Room {
     ///
     /// This method has a default implementation.
     fn tile_type_at_mut(&mut self, pos: Position) -> Option<&mut TileType> {
-        let pos = pos - *self.pos();
-        if pos.x() < 0 || pos.y() < 0 {
+        let shape_pos = ShapePosition::from(pos);
+        if !shape_pos.is_valid_shape_index() {
             None
         } else {
-            let local_pos = LocalPosition::new(pos.x() as Length, pos.y() as Length);
-            self.tile_type_at_local_mut(local_pos)
+            self.tile_type_at_local_mut(shape_pos)
         }
     }
 }
