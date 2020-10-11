@@ -26,16 +26,6 @@ impl PlacedRoomWrapper {
     }
 }
 
-impl HasShapePosition for PlacedRoomWrapper {
-    fn shape_position(&self) -> &ShapePosition {
-        self.room.shape_position()
-    }
-
-    fn shape_position_mut(&mut self) -> &mut ShapePosition {
-        self.room.shape_position_mut()
-    }
-}
-
 impl HasArea for PlacedRoomWrapper {
     fn area(&self) -> &Area {
         &self.area

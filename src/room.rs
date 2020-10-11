@@ -7,12 +7,12 @@ use std::ops::{Index, IndexMut};
 use super::{
     PortalCollection, Portals, PortalsMut, SubRoomCollection, SubRooms, SubRoomsMut, TileType,
 };
-use crate::geometry::{HasShapePosition, Shape, ShapePosition};
+use crate::geometry::{Shape, ShapePosition};
 
 /// The defining trait for a map that does not have a world position.
 ///
-/// `Room` derives from [`ShapePosition`](geometry/struct.ShapePosition.html) to define its local displacement, [`PortalCollection`](trait.PortalCollection.html) to describe its connections to other rooms, [`Shape`](geometry/trait.Shape.html) to define the `Room`s ability to intersect positions, and [`SubRoomCollection`](trait.SubRoomCollection.html) to describe all rooms contained within this room.
-pub trait Room: HasShapePosition + PortalCollection + Shape + SubRoomCollection {
+/// `Room` derives from [`PortalCollection`](trait.PortalCollection.html) to describe its connections to other rooms, [`Shape`](geometry/trait.Shape.html) to define the `Room`s ability to intersect positions, and [`SubRoomCollection`](trait.SubRoomCollection.html) to describe all rooms contained within this room.
+pub trait Room: PortalCollection + Shape + SubRoomCollection {
     /// A helper method to allow structs implementing `Room` to be `Clone`'ed.
     ///
     /// [https://users.rust-lang.org/t/solved-is-it-possible-to-clone-a-boxed-trait-object/1714/5](https://users.rust-lang.org/t/solved-is-it-possible-to-clone-a-boxed-trait-object/1714/5)
