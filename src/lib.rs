@@ -15,6 +15,9 @@ pub mod geometry {
 // Standard includes.
 
 // Internal includes.
+mod does_all_dun_gen;
+mod does_all_instanced_dun_gen;
+mod does_all_static_dun_gen;
 mod does_dun_gen;
 mod does_dun_gen_placed;
 mod placed_room;
@@ -32,6 +35,9 @@ mod supports_dun_gen;
 mod supports_dun_gen_placed;
 mod tile_type;
 
+pub use does_all_dun_gen::DoesAllDunGen;
+pub use does_all_instanced_dun_gen::DoesAllInstancedDunGen;
+pub use does_all_static_dun_gen::DoesAllStaticDunGen;
 pub use does_dun_gen::{DoesDunGen, DoesDunGenStatic};
 pub use does_dun_gen_placed::{DoesDunGenPlaced, DoesDunGenPlacedStatic};
 pub use placed_room::PlacedRoom;
