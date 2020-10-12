@@ -6,6 +6,9 @@
 //! As the purpose of this crate is to provide traits and helper types for `dungen_minion` and `dungen_minion`'s other dependent crates to consume, the gemeral usages of this crate's traits and helper types are defined here, while their specific implementations are usually defined in those other crates.
 
 // External includes.
+#[macro_use]
+extern crate lazy_static;
+
 #[allow(missing_docs)]
 #[allow(missing_doc_code_examples)]
 pub mod geometry {
@@ -46,7 +49,7 @@ pub use portal::Portal;
 pub use portal_collection::PortalCollection;
 pub use portals::Portals;
 pub use portals_mut::PortalsMut;
-pub use room::Room;
+pub use room::{get_new_room_id, Room};
 pub use sub_room::SubRoom;
 pub use sub_room_collection::SubRoomCollection;
 pub use sub_rooms::SubRooms;

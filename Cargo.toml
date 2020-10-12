@@ -13,3 +13,4 @@ readme = "readme.md"
 
 [dependencies]
 dungen_minion_geometry = { path = "../dungen_minion_geometry" }
+lazy_static = "1.4.0"

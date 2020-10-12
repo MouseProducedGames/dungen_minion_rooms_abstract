@@ -1,6 +1,7 @@
 // External includes.
 
 // Standard includes.
+use std::hash::{Hash, Hasher};
 use std::ops::{Index, IndexMut};
 
 // Internal includes.
@@ -47,6 +48,14 @@ impl Clone for Box<dyn PlacedRoom> {
     }
 }
 
+impl Eq for Box<dyn PlacedRoom> {}
+
+impl Hash for Box<dyn PlacedRoom> {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.id().hash(state);
+    }
+}
+
 impl Index<Position> for dyn PlacedRoom {
     type Output = TileType;
 
@@ -58,5 +67,11 @@ impl Index<Position> for dyn PlacedRoom {
 impl IndexMut<Position> for dyn PlacedRoom {
     fn index_mut(&mut self, pos: Position) -> &mut Self::Output {
         self.tile_type_at_mut(pos).unwrap()
+    }
+}
+
+impl PartialEq for Box<dyn PlacedRoom> {
+    fn eq(&self, other: &Self) -> bool {
+        self.id() == other.id()
     }
 }

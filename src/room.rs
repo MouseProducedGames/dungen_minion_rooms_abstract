@@ -1,7 +1,21 @@
 // External includes.
 
 // Standard includes.
+use std::cmp::{Eq, PartialEq};
+use std::hash::{Hash, Hasher};
 use std::ops::{Index, IndexMut};
+use std::sync::atomic::{AtomicU64, Ordering};
+
+lazy_static! {
+    static ref ATOMIC_ID: AtomicU64 = AtomicU64::new(0);
+}
+
+/// Call this to get an ID for a new room.
+pub fn get_new_room_id() -> u64 {
+    // We don't actually care in what order we receive the Id; only that we get a different one.
+    // "Ordering::Relaxed" is sufficient for that.
+    ATOMIC_ID.fetch_add(1, Ordering::Relaxed)
+}
 
 // Internal includes.
 use super::{
@@ -17,6 +31,9 @@ pub trait Room: PortalCollection + Shape + SubRoomCollection {
     ///
     /// [https://users.rust-lang.org/t/solved-is-it-possible-to-clone-a-boxed-trait-object/1714/5](https://users.rust-lang.org/t/solved-is-it-possible-to-clone-a-boxed-trait-object/1714/5)
     fn box_clone(&self) -> Box<dyn Room>;
+
+    /// Provides a very-likely unique u64 Id for a Room.
+    fn id(&self) -> u64;
 
     /// Returns a `Portals` collection of immutable [`Portal`](struct.Portal.html) references for iteration.
     fn portals(&self) -> Portals;
@@ -50,6 +67,14 @@ impl Clone for Box<dyn Room> {
     }
 }
 
+impl Eq for Box<dyn Room> {}
+
+impl Hash for Box<dyn Room> {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.id().hash(state);
+    }
+}
+
 impl Index<ShapePosition> for dyn Room {
     type Output = TileType;
 
@@ -61,5 +86,11 @@ impl Index<ShapePosition> for dyn Room {
 impl IndexMut<ShapePosition> for dyn Room {
     fn index_mut(&mut self, pos: ShapePosition) -> &mut Self::Output {
         self.tile_type_at_local_mut(pos).unwrap()
+    }
+}
+
+impl PartialEq for Box<dyn Room> {
+    fn eq(&self, other: &Self) -> bool {
+        self.id() == other.id()
     }
 }

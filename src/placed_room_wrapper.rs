@@ -103,6 +103,10 @@ impl Room for PlacedRoomWrapper {
         Box::new((*self).clone())
     }
 
+    fn id(&self) -> u64 {
+        self.room.id()
+    }
+
     fn portals(&self) -> Portals {
         self.room.portals()
     }
