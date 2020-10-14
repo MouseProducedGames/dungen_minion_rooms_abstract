@@ -3,13 +3,13 @@
 // Standard includes.
 
 // Internal includes.
-use super::{Room, SubRoom};
-use crate::geometry::ShapePosition;
+use super::{MapId, SubRoom, SubRooms, SubRoomsMut};
+use crate::geometry::Position;
 
 /// The defining trait of a type that has a collection of [`SubRoom`](struct.SubRoom.html)s.
 pub trait SubRoomCollection {
-    /// Adds a `SubRoom` at a given `ShapePosition`.
-    fn add_sub_room(&mut self, local_shape_position: ShapePosition, target: Box<dyn Room>);
+    /// Adds a `SubRoom` at a given `Position`.
+    fn add_sub_room(&mut self, local_position: Position, target: MapId);
 
     /// Gets an `Option` on an immutable reference to a `SubRoom`; returns None if the index is out of range.
     fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom>;
@@ -19,4 +19,10 @@ pub trait SubRoomCollection {
 
     /// Gets the number of `SubRoom`s contained in the collection.
     fn sub_room_count(&self) -> usize;
+
+    /// Returns a `SubRooms` collection of immutable [`SubRoom`](struct.SubRoom.html) references for iteration.
+    fn sub_rooms(&self) -> SubRooms;
+
+    /// Returns a `SubRoomsMut` collection of mutable [`SubRoom`](struct.SubRoom.html) references for iteration.
+    fn sub_rooms_mut(&mut self) -> SubRoomsMut;
 }

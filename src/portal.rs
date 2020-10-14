@@ -3,31 +3,42 @@
 // Standard includes.
 
 // Internal includes.
-use super::PlacedRoom;
+use super::MapId;
 use crate::geometry::*;
 
-/// Contains information about a [`PlacedRoom`](trait.PlacedRoom.html) that can be reached from this `Portal`.
+/// Contains information about a [`Map`](trait.Map.html) that can be reached from this `Portal`.
 ///
-/// `Portal` contains a [`ShapePosition`](geometry/struct.ShapePosition.html), which designates where the `Portal` is on the map the `Portal` originates from, an [`OrdinalDirection`](geometry/enum.OrdinalDirection.html) which designates in which direction the target room faces from the perspective of the portal, and a `Box<dyn PlacedRoom>` target room.
+/// `Portal` contains a [`Position`](geometry/struct.Position.html), which designates where the `Portal` is on the map the `Portal` originates from, an [`OrdinalDirection`](geometry/enum.OrdinalDirection.html) which designates in which direction the target room faces from the perspective of the portal, and a `MapId` for the target room.
 #[derive(Clone)]
 pub struct Portal {
-    local_shape_position: ShapePosition,
+    local_position: Position,
     portal_to_room_facing: OrdinalDirection,
-    target: Box<dyn PlacedRoom>,
+    portal_to_room_position: Position,
+    target: MapId,
 }
 
 impl Portal {
-    /// Creates a new `Portal` at a given `ShapePosition`, where the `PlacedRoom` is facing a specific `OrdinalDirection` from the `Portal`'s perspective.
+    /// Creates a new `Portal` at a given `ShapePosition`, where the `Map` is facing a specific `OrdinalDirection` from the `Portal`'s perspective.
     pub fn new(
-        local_shape_position: ShapePosition,
+        local_position: Position,
         portal_to_room_facing: OrdinalDirection,
-        target: Box<dyn PlacedRoom>,
+        portal_to_room_position: Position,
+        target: MapId,
     ) -> Self {
         Self {
-            local_shape_position,
+            local_position,
             portal_to_room_facing,
+            portal_to_room_position,
             target,
         }
+    }
+
+    pub fn local_position(&self) -> &Position {
+        &self.local_position
+    }
+
+    pub fn local_position_mut(&mut self) -> &mut Position {
+        &mut self.local_position
     }
 
     /// An immutable reference to the `OrdinalDirection` the room is facing, from the perspective of the portal.
@@ -40,24 +51,22 @@ impl Portal {
         &mut self.portal_to_room_facing
     }
 
+    pub fn portal_to_room_position(&self) -> &Position {
+        &self.portal_to_room_position
+    }
+
+    pub fn portal_to_room_position_mut(&mut self) -> &mut Position {
+        &mut self.portal_to_room_position
+    }
+
     #[allow(clippy::borrowed_box)]
-    /// Returns an immutable reference to the `Box<dyn PlacedRoom>` portal target.
-    pub fn target(&self) -> &Box<dyn PlacedRoom> {
-        &self.target
+    /// Returns an immutable reference to the `MapId` of the portal target.
+    pub fn target(&self) -> MapId {
+        self.target
     }
 
-    /// Returns a mutable reference to the `Box<dyn PlacedRoom>` portal target.
-    pub fn target_mut(&mut self) -> &mut Box<dyn PlacedRoom> {
+    /// Returns a mutable reference to the `MapId` of the portal target.
+    pub fn target_mut(&mut self) -> &MapId {
         &mut self.target
-    }
-}
-
-impl HasShapePosition for Portal {
-    fn shape_position(&self) -> &ShapePosition {
-        &self.local_shape_position
-    }
-
-    fn shape_position_mut(&mut self) -> &mut ShapePosition {
-        &mut self.local_shape_position
     }
 }

@@ -18,44 +18,34 @@ pub mod geometry {
 // Standard includes.
 
 // Internal includes.
-mod does_all_dun_gen;
-mod does_all_instanced_dun_gen;
-mod does_all_static_dun_gen;
 mod does_dun_gen;
-mod does_dun_gen_placed;
-mod placed_room;
-mod placed_room_wrapper;
+mod dummy_map;
+mod map;
+mod map_id;
 mod portal;
 mod portal_collection;
 mod portals;
 mod portals_mut;
-mod room;
 mod sub_room;
 mod sub_room_collection;
 mod sub_rooms;
 mod sub_rooms_mut;
 mod supports_dun_gen;
-mod supports_dun_gen_placed;
 mod tile_type;
 
-pub use does_all_dun_gen::DoesAllDunGen;
-pub use does_all_instanced_dun_gen::DoesAllInstancedDunGen;
-pub use does_all_static_dun_gen::DoesAllStaticDunGen;
-pub use does_dun_gen::{DoesDunGen, DoesDunGenStatic};
-pub use does_dun_gen_placed::{DoesDunGenPlaced, DoesDunGenPlacedStatic};
-pub use placed_room::PlacedRoom;
-pub use placed_room_wrapper::PlacedRoomWrapper;
+pub use does_dun_gen::DoesDunGen;
+pub(crate) use dummy_map::DummyMap;
+pub use map::{get_new_map_id, Map};
+pub use map_id::{register_room, MapId, MAPS};
 pub use portal::Portal;
 pub use portal_collection::PortalCollection;
 pub use portals::Portals;
 pub use portals_mut::PortalsMut;
-pub use room::{get_new_room_id, Room};
 pub use sub_room::SubRoom;
 pub use sub_room_collection::SubRoomCollection;
 pub use sub_rooms::SubRooms;
 pub use sub_rooms_mut::SubRoomsMut;
 pub use supports_dun_gen::SupportsDunGen;
-pub use supports_dun_gen_placed::SupportsDunGenPlaced;
 pub use tile_type::TileType;
 
 #[cfg(test)]
