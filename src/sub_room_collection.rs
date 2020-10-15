@@ -8,7 +8,7 @@ use crate::geometry::Position;
 
 /// The defining trait of a type that has a collection of [`SubRoom`](struct.SubRoom.html)s.
 pub trait SubRoomCollection {
-    /// Adds a `SubRoom` at a given `Position`.
+    /// Adds a `SubRoom` at a given local `Position`.
     fn add_sub_room(&mut self, local_position: Position, target: MapId);
 
     /// Gets an `Option` on an immutable reference to a `SubRoom`; returns None if the index is out of range.

@@ -6,6 +6,7 @@
 use super::*;
 use crate::geometry::*;
 
+/// A [`Map`](trait.Map.html) implementation intended for testing, and as a placeholder.
 #[derive(Clone)]
 pub(crate) struct DummyMap {
     area: Area,
@@ -50,7 +51,7 @@ impl HasSize for DummyMap {
 }
 
 impl IntersectsPos for DummyMap {
-    fn intersects_pos(&self, position: Position) -> bool {
+    fn intersects_pos(&self, _position: Position) -> bool {
         false
     }
 }
@@ -64,15 +65,15 @@ impl Map for DummyMap {
         0
     }
 
-    fn tile_type_at_local(&self, pos: Position) -> Option<&TileType> {
+    fn tile_type_at_local(&self, _pos: Position) -> Option<&TileType> {
         None
     }
 
-    fn tile_type_at_local_mut(&mut self, pos: Position) -> Option<&mut TileType> {
+    fn tile_type_at_local_mut(&mut self, _pos: Position) -> Option<&mut TileType> {
         None
     }
 
-    fn tile_type_at_local_set(&mut self, pos: Position, tile_type: TileType) -> Option<TileType> {
+    fn tile_type_at_local_set(&mut self, _pos: Position, _tile_type: TileType) -> Option<TileType> {
         None
     }
 }
@@ -86,18 +87,18 @@ impl PlacedShape for DummyMap {}
 impl PortalCollection for DummyMap {
     fn add_portal(
         &mut self,
-        local_position: Position,
-        portal_to_room_facing: OrdinalDirection,
-        portal_to_room_position: Position,
-        target: MapId,
+        _local_position: Position,
+        _portal_to_room_facing: OrdinalDirection,
+        _portal_to_room_position: Position,
+        _target: MapId,
     ) {
     }
 
-    fn get_portal_at(&self, index: usize) -> Option<&Portal> {
+    fn get_portal_at(&self, _index: usize) -> Option<&Portal> {
         None
     }
 
-    fn get_portal_at_mut(&mut self, index: usize) -> Option<&mut Portal> {
+    fn get_portal_at_mut(&mut self, _index: usize) -> Option<&mut Portal> {
         None
     }
 
@@ -117,13 +118,13 @@ impl PortalCollection for DummyMap {
 impl Shape for DummyMap {}
 
 impl SubRoomCollection for DummyMap {
-    fn add_sub_room(&mut self, local_position: Position, target: MapId) {}
+    fn add_sub_room(&mut self, _local_position: Position, _target: MapId) {}
 
-    fn get_sub_room_at(&self, index: usize) -> Option<&SubRoom> {
+    fn get_sub_room_at(&self, _index: usize) -> Option<&SubRoom> {
         None
     }
 
-    fn get_sub_room_at_mut(&mut self, index: usize) -> Option<&mut SubRoom> {
+    fn get_sub_room_at_mut(&mut self, _index: usize) -> Option<&mut SubRoom> {
         None
     }
 

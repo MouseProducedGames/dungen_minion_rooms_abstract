@@ -7,6 +7,7 @@ use parking_lot::RwLock;
 use super::{DummyMap, Map};
 
 lazy_static! {
+    /// Global Vec storage for `Map` implementations.
     pub static ref MAPS: RwLock<Vec<RwLock<Box<dyn Map>>>> = RwLock::new(Vec::new());
 }
 
@@ -27,4 +28,5 @@ where
     output
 }
 
+/// A definition for `MapId`, so that the implementation can be more easily changed if needed or desired.
 pub type MapId = usize;

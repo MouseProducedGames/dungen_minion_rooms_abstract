@@ -15,8 +15,8 @@ use super::Portal;
 /// let mut portals_mut = PortalsMut::new(&mut portals_source);
 /// for portal_mut in portals_mut {
 ///     // Rotate all of the rooms at the ends of the portals 90 degrees to the right.
-///     *portal_mut.portal_to_room_facing_mut() =
-///         *portal_mut.portal_to_room_facing() + OrdinalRotation::Right90;
+///     *portal_mut.portal_to_map_facing_mut() =
+///         *portal_mut.portal_to_map_facing() + OrdinalRotation::Right90;
 /// }
 /// ```
 pub struct PortalsMut<'a> {

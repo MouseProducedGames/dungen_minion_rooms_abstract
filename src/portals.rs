@@ -16,7 +16,7 @@ use super::Portal;
 /// let portals = Portals::new(&portals_source);
 /// for portal in portals {
 ///     // Store the local facing of each `Portal` as it exits into the target room.
-///     local_facings.push(*portal.portal_to_room_facing());
+///     local_facings.push(*portal.portal_to_mapfacing());
 /// }
 /// ```
 pub struct Portals<'a> {

@@ -27,6 +27,7 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubRoomCollection 
     /// [https://users.rust-lang.org/t/solved-is-it-possible-to-clone-a-boxed-trait-object/1714/5](https://users.rust-lang.org/t/solved-is-it-possible-to-clone-a-boxed-trait-object/1714/5)
     fn box_clone(&self) -> Box<dyn Map>;
 
+    /// Determines if the local `Position` is valid. Provides a default implementation.
     fn is_local_position_valid(&self, position: Position) -> bool {
         !(position.x() < 0
             || position.y() < 0
@@ -61,13 +62,13 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubRoomCollection 
         }
     }
 
-    /// Gets an option for an immutable reference to the `TileType` at the given `ShapePosition`. Returns None if the `ShapePosition` is out of bounds, or there is no tile at that location.
+    /// Gets an option for an immutable reference to the `TileType` at the given local `Position`. Returns None if the local `Position` is out of bounds, or there is no tile at that location.
     fn tile_type_at_local(&self, pos: Position) -> Option<&TileType>;
 
-    /// Gets an option for a mutable reference to the `TileType` at the given `ShapePosition`. Returns None if the `ShapePosition` is out of bounds, or there is no tile at that location.
+    /// Gets an option for a mutable reference to the `TileType` at the given local `Position`. Returns None if the `Position` is out of bounds, or there is no tile at that location.
     fn tile_type_at_local_mut(&mut self, pos: Position) -> Option<&mut TileType>;
 
-    /// Sets the `TileType` at the given `ShapePosition`, and returns the previous `TileType`, if any. The `Map` will expand to meet a `ShapePosition` larger than its [`Size`](geometry/struct.Size.html).
+    /// Sets the `TileType` at the given local `Position`, if it is valid, and returns the previous `TileType`, if any. The `Map` will expand to meet a local `Position` larger than its [`Size`](geometry/struct.Size.html).
     fn tile_type_at_local_set(&mut self, pos: Position, tile_type: TileType) -> Option<TileType>;
 }
 
