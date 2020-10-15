@@ -12,7 +12,7 @@ lazy_static! {
 }
 
 /// Call this to register a `Map`.
-pub fn register_room<TMap>(map: TMap) -> MapId
+pub fn register_map<TMap>(map: TMap) -> MapId
 where
     TMap: 'static + Map,
 {
