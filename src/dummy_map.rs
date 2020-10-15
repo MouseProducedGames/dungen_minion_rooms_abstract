@@ -88,8 +88,8 @@ impl PortalCollection for DummyMap {
     fn add_portal(
         &mut self,
         _local_position: Position,
-        _portal_to_room_facing: OrdinalDirection,
-        _portal_to_room_position: Position,
+        _portal_to_map_facing: OrdinalDirection,
+        _portal_to_map_position: Position,
         _target: MapId,
     ) {
     }
@@ -118,25 +118,25 @@ impl PortalCollection for DummyMap {
 impl Shape for DummyMap {}
 
 impl SubMapCollection for DummyMap {
-    fn add_sub_room(&mut self, _local_position: Position, _target: MapId) {}
+    fn add_sub_map(&mut self, _local_position: Position, _target: MapId) {}
 
-    fn get_sub_room_at(&self, _index: usize) -> Option<&SubMap> {
+    fn get_sub_map_at(&self, _index: usize) -> Option<&SubMap> {
         None
     }
 
-    fn get_sub_room_at_mut(&mut self, _index: usize) -> Option<&mut SubMap> {
+    fn get_sub_map_at_mut(&mut self, _index: usize) -> Option<&mut SubMap> {
         None
     }
 
-    fn sub_room_count(&self) -> usize {
+    fn sub_map_count(&self) -> usize {
         0
     }
 
-    fn sub_rooms(&self) -> SubMaps {
+    fn sub_maps(&self) -> SubMaps {
         SubMaps::new(&[])
     }
 
-    fn sub_rooms_mut(&mut self) -> SubMapsMut {
+    fn sub_maps_mut(&mut self) -> SubMapsMut {
         SubMapsMut::new(&mut [])
     }
 }

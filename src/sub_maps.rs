@@ -11,12 +11,12 @@ use super::SubMap;
 /// ```
 /// # use dungen_minion_rooms_abstract::*;
 /// # use dungen_minion_rooms_abstract::geometry::*;
-/// # let sub_rooms_source = Vec::<SubMap>::new();
+/// # let sub_maps_source = Vec::<SubMap>::new();
 /// let mut local_positions = Vec::new();
-/// let sub_rooms = SubMaps::new(&sub_rooms_source);
-/// for sub_room in sub_rooms {
+/// let sub_maps = SubMaps::new(&sub_maps_source);
+/// for sub_map in sub_maps {
 ///     // Store the local position of each `SubMap`.
-///     local_positions.push(*sub_room.local_position());
+///     local_positions.push(*sub_map.local_position());
 /// }
 /// ```
 pub struct SubMaps<'a> {

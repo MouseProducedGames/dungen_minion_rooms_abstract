@@ -11,11 +11,11 @@ use super::SubMap;
 /// ```
 /// # use dungen_minion_rooms_abstract::*;
 /// # use dungen_minion_rooms_abstract::geometry::*;
-/// # let mut sub_rooms_source = Vec::<SubMap>::new();
-/// let mut sub_rooms_mut = SubMapsMut::new(&mut sub_rooms_source);
-/// for sub_room_mut in sub_rooms_mut {
+/// # let mut sub_maps_source = Vec::<SubMap>::new();
+/// let mut sub_maps_mut = SubMapsMut::new(&mut sub_maps_source);
+/// for sub_map_mut in sub_maps_mut {
 ///     // Move all of the `SubMap`s 2 to the right, and 1 down.
-///     *sub_room_mut.local_position_mut() = *sub_room_mut.local_position() + Position::new(2, 1);
+///     *sub_map_mut.local_position_mut() = *sub_map_mut.local_position() + Position::new(2, 1);
 /// }
 /// ```
 pub struct SubMapsMut<'a> {
