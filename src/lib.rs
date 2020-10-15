@@ -41,10 +41,10 @@ pub use portal::Portal;
 pub use portal_collection::PortalCollection;
 pub use portals::Portals;
 pub use portals_mut::PortalsMut;
-pub use sub_room::SubRoom;
-pub use sub_room_collection::SubRoomCollection;
-pub use sub_rooms::SubRooms;
-pub use sub_rooms_mut::SubRoomsMut;
+pub use sub_room::SubMap;
+pub use sub_room_collection::SubMapCollection;
+pub use sub_rooms::SubMaps;
+pub use sub_rooms_mut::SubMapsMut;
 pub use supports_dun_gen::SupportsDunGen;
 pub use tile_type::TileType;
 

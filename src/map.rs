@@ -6,7 +6,7 @@ use std::hash::{Hash, Hasher};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 // Internal includes.
-use super::{MapId, PortalCollection, SubRoomCollection, TileType};
+use super::{MapId, PortalCollection, SubMapCollection, TileType};
 use crate::geometry::*;
 
 lazy_static! {
@@ -21,7 +21,7 @@ pub fn get_new_map_id() -> MapId {
 }
 
 /// The defining trait for a map..
-pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubRoomCollection {
+pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
     /// A helper method to allow structs implementing `Map` to be `Clone`'ed.
     ///
     /// [https://users.rust-lang.org/t/solved-is-it-possible-to-clone-a-boxed-trait-object/1714/5](https://users.rust-lang.org/t/solved-is-it-possible-to-clone-a-boxed-trait-object/1714/5)

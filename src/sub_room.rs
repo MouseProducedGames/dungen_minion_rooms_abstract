@@ -8,15 +8,15 @@ use crate::geometry::Position;
 
 /// Contains information about a [`Map`](trait.Map.html) contanined within, and sub-ordinate to, another `Map`.
 ///
-/// SubRoom contains a local [`Position`](geometry/struct.ShapePosition.html), which designates where the `Map` is in comparison to the containing `Map`, and a `MapId` for the sub-map.
+/// SubMap contains a local [`Position`](geometry/struct.ShapePosition.html), which designates where the sub-`Map` is in comparison to the containing `Map`, and a `MapId` for the sub-map.
 #[derive(Clone)]
-pub struct SubRoom {
+pub struct SubMap {
     local_position: Position,
     value: MapId,
 }
 
-impl SubRoom {
-    /// Constructs a new `SubRoom` from a local `Position` and a `MapId` for the sub-map.
+impl SubMap {
+    /// Constructs a new `SubMap` from a local `Position` and a `MapId` for the sub-map.
     pub fn new(local_position: Position, value: MapId) -> Self {
         Self {
             local_position,
@@ -35,12 +35,12 @@ impl SubRoom {
     }
 
     #[allow(clippy::borrowed_box)]
-    /// Returns an immutable reference to the `Box<dyn Room>`.
+    /// Returns the `MapId` for the sub-map.
     pub fn value(&self) -> MapId {
         self.value
     }
 
-    /// Returns a mutable reference to the `Box<dyn Room>`.
+    /// A mutable reference to the `MapId` for the sub-map.
     pub fn value_mut(&mut self) -> &MapId {
         &mut self.value
     }
