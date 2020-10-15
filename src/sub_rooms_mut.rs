@@ -15,7 +15,7 @@ use super::SubRoom;
 /// let mut sub_rooms_mut = SubRoomsMut::new(&mut sub_rooms_source);
 /// for sub_room_mut in sub_rooms_mut {
 ///     // Move all of the `SubRoom`s 2 to the right, and 1 down.
-///     *sub_room_mut.shape_position_mut() = *sub_room_mut.shape_position() + ShapePosition::new(2, 1);
+///     *sub_room_mut.local_position_mut() = *sub_room_mut.local_position() + Position::new(2, 1);
 /// }
 /// ```
 pub struct SubRoomsMut<'a> {

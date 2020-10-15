@@ -24,11 +24,11 @@ impl SubRoom {
         }
     }
 
-    fn local_position(&self) -> &Position {
+    pub fn local_position(&self) -> &Position {
         &self.local_position
     }
 
-    fn loca_position_mut(&mut self) -> &mut Position {
+    pub fn local_position_mut(&mut self) -> &mut Position {
         &mut self.local_position
     }
 
