@@ -8,7 +8,7 @@ use crate::geometry::*;
 
 /// Contains information about a [`Map`](trait.Map.html) that can be reached from this `Portal`.
 ///
-/// `Portal` contains a [`Position`](geometry/struct.Position.html), which designates where the `Portal` is on the map the `Portal` originates from, an [`OrdinalDirection`](geometry/enum.OrdinalDirection.html) which designates in which direction the target room faces from the perspective of the portal, a second `Position` which designates the end-point of the portal on the target `Map`, and a `MapId` for the target map.
+/// `Portal` contains a [`Position`](geometry/struct.Position.html), which designates where the `Portal` is on the map the `Portal` originates from, an [`OrdinalDirection`](geometry/enum.OrdinalDirection.html) which designates in which direction the target map faces from the perspective of the portal, a second `Position` which designates the end-point of the portal on the target `Map`, and a `MapId` for the target map.
 #[derive(Clone)]
 pub struct Portal {
     local_position: Position,
@@ -43,12 +43,12 @@ impl Portal {
         &mut self.local_position
     }
 
-    /// An immutable reference to the `OrdinalDirection` the room is facing, from the perspective of the portal.
+    /// An immutable reference to the `OrdinalDirection` the map is facing, from the perspective of the portal.
     pub fn portal_to_map_facing(&self) -> &OrdinalDirection {
         &self.portal_to_map_facing
     }
 
-    /// A mutable reference to the `OrdinalDirection` the room is facing, from the perspective of the portal.
+    /// A mutable reference to the `OrdinalDirection` the map is facing, from the perspective of the portal.
     pub fn portal_to_map_facing_mut(&mut self) -> &mut OrdinalDirection {
         &mut self.portal_to_map_facing
     }

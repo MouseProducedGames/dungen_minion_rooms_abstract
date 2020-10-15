@@ -15,7 +15,7 @@ use super::Portal;
 /// let mut local_facings = Vec::new();
 /// let portals = Portals::new(&portals_source);
 /// for portal in portals {
-///     // Store the local facing of each `Portal` as it exits into the target room.
+///     // Store the local facing of each `Portal` as it exits into the target map.
 ///     local_facings.push(*portal.portal_to_mapfacing());
 /// }
 /// ```

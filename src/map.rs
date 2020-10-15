@@ -13,7 +13,7 @@ lazy_static! {
     static ref ATOMIC_ID: AtomicUsize = AtomicUsize::new(0);
 }
 
-/// Call this to get an ID for a new room.
+/// Call this to get an ID for a new [`Map`](trait.Map.html).
 pub fn get_new_map_id() -> MapId {
     // We don't actually care in what order we receive the Id; only that we get a different one.
     // "Ordering::Relaxed" is sufficient for that.
