@@ -88,7 +88,7 @@ impl PortalCollection for DummyMap {
     fn add_portal(
         &mut self,
         _local_position: Position,
-        _portal_to_map_facing: OrdinalDirection,
+        _portal_to_map_facing: CardinalDirection,
         _portal_to_map_position: Position,
         _target: MapId,
     ) {

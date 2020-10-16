@@ -8,11 +8,11 @@ use crate::geometry::*;
 
 /// The defining trait of a type that has a collection of [`Portal`](struct.Portal.html)s.
 pub trait PortalCollection {
-    /// Adds a `Portal` at a given local `Position`, where the `Map` is facing a specific `OrdinalDirection` from the `Portal`'s perspective, with a specific end-point local `Position` on the target map.
+    /// Adds a `Portal` at a given local `Position`, where the `Map` is facing a specific `CardinalDirection` from the `Portal`'s perspective, with a specific end-point local `Position` on the target map.
     fn add_portal(
         &mut self,
         local_position: Position,
-        portal_to_map_facing: OrdinalDirection,
+        portal_to_map_facing: CardinalDirection,
         portal_to_map_position: Position,
         target: MapId,
     );
