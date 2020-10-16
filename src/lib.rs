@@ -32,6 +32,7 @@ mod sub_maps;
 mod sub_maps_mut;
 mod supports_dun_gen;
 mod tile_type;
+mod tile_type_cmp;
 
 pub use does_dun_gen::DoesDunGen;
 pub(crate) use dummy_map::DummyMap;
@@ -47,6 +48,7 @@ pub use sub_maps::SubMaps;
 pub use sub_maps_mut::SubMapsMut;
 pub use supports_dun_gen::SupportsDunGen;
 pub use tile_type::TileType;
+pub use tile_type_cmp::{TileTypeCmp, TileTypeStandardCmp};
 
 #[cfg(test)]
 mod tests {
