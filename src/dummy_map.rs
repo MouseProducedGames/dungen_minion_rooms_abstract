@@ -65,7 +65,7 @@ impl Map for DummyMap {
         0
     }
 
-    fn tile_type_at_local(&self, _pos: Position) -> Option<&TileType> {
+    fn tile_type_at_local(&self, _pos: Position) -> Option<TileType> {
         None
     }
 

@@ -41,7 +41,7 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
     /// Gets an option for an immutable reference to the `TileType` at the given `Position`. Returns None if the `Position` is out of bounds, or there is no tile at that location.
     ///
     /// This method has a default implementation.
-    fn tile_type_at(&self, position: Position) -> Option<&TileType> {
+    fn tile_type_at(&self, position: Position) -> Option<TileType> {
         let local_position = position - *self.position();
         if !self.is_local_position_valid(local_position) {
             None
@@ -63,7 +63,7 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
     }
 
     /// Gets an option for an immutable reference to the `TileType` at the given local `Position`. Returns None if the local `Position` is out of bounds, or there is no tile at that location.
-    fn tile_type_at_local(&self, pos: Position) -> Option<&TileType>;
+    fn tile_type_at_local(&self, pos: Position) -> Option<TileType>;
 
     /// Gets an option for a mutable reference to the `TileType` at the given local `Position`. Returns None if the `Position` is out of bounds, or there is no tile at that location.
     fn tile_type_at_local_mut(&mut self, pos: Position) -> Option<&mut TileType>;
