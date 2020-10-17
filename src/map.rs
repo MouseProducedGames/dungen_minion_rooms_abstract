@@ -32,11 +32,14 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
         !(position.x() < 0
             || position.y() < 0
             || position.x() >= self.size().width() as i32
-            || position.y() <= self.size().height() as i32)
+            || position.y() >= self.size().height() as i32)
     }
 
     /// Provides a very-likely unique u64 Id for a Map.
     fn map_id(&self) -> MapId;
+
+    /// Rotates the map according to the given rotation, relative to its `self.area().position()`.
+    fn rotate(&mut self, rotation: CardinalRotation);
 
     /// Gets an option for an immutable reference to the `TileType` at the given `Position`. Returns None if the `Position` is out of bounds, or there is no tile at that location.
     ///

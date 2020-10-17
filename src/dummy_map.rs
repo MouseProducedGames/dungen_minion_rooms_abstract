@@ -65,6 +65,8 @@ impl Map for DummyMap {
         0
     }
 
+    fn rotate(&mut self, _rotation: CardinalRotation) {}
+
     fn tile_type_at_local(&self, _pos: Position) -> Option<TileType> {
         None
     }
