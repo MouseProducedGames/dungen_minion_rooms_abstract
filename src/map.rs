@@ -63,6 +63,8 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
     }
 
     /// Gets an option for an immutable reference to the `TileType` at the given local `Position`. Returns None if the local `Position` is out of bounds, or there is no tile at that location.
+    ///
+    /// Uses [`TileTypeStandardCmp`](struct.TileTypeStandardCmp.html) to determine which sub-map tile has priority, if any.
     fn tile_type_at_local(&self, pos: Position) -> Option<TileType>;
 
     /// Gets an option for a mutable reference to the `TileType` at the given local `Position`. Returns None if the `Position` is out of bounds, or there is no tile at that location.
@@ -70,6 +72,15 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
 
     /// Sets the `TileType` at the given local `Position`, if it is valid, and returns the previous `TileType`, if any. The `Map` will expand to meet a local `Position` larger than its [`Size`](geometry/struct.Size.html).
     fn tile_type_at_local_set(&mut self, pos: Position, tile_type: TileType) -> Option<TileType>;
+
+    /// Gets an option for an immutable reference to the `TileType` at the given local `Position`. Returns None if the local `Position` is out of bounds, or there is no tile at that location.
+    ///
+    /// Uses a comparison function to determine which sub-map tile has priority, if any.
+    fn tile_type_at_local_sort_by(
+        &self,
+        pos: Position,
+        sort_best: &dyn Fn(&Option<TileType>, &Option<TileType>) -> std::cmp::Ordering,
+    ) -> Option<TileType>;
 }
 
 impl Clone for Box<dyn Map> {

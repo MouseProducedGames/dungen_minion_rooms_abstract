@@ -76,6 +76,14 @@ impl Map for DummyMap {
     fn tile_type_at_local_set(&mut self, _pos: Position, _tile_type: TileType) -> Option<TileType> {
         None
     }
+
+    fn tile_type_at_local_sort_by<'a>(
+        &self,
+        _pos: Position,
+        _sort_best: &dyn Fn(&Option<TileType>, &Option<TileType>) -> std::cmp::Ordering,
+    ) -> Option<TileType> {
+        None
+    }
 }
 
 impl Placed for DummyMap {}

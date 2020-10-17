@@ -38,10 +38,10 @@ pub trait TileTypeCmp {
         Self::priority_option(left).cmp(&Self::priority_option(right))
     }
 
-    /// Compares the priority of the two `TileType`s and returns the one with the higher priority.
+    /// Compares the priority of the two `TileType`s and returns the one with the greater priority.
     ///
     /// If both have equal priority, `left` is returned.
-    fn return_lowest<'a>(left: &'a TileType, right: &'a TileType) -> &'a TileType {
+    fn return_greater<'a>(left: &'a TileType, right: &'a TileType) -> &'a TileType {
         match Self::cmp(left, right) {
             std::cmp::Ordering::Greater => right,
             std::cmp::Ordering::Equal => left,
@@ -49,11 +49,28 @@ pub trait TileTypeCmp {
         }
     }
 
-    /// Compares the priority of the two `TileType`s and returns the one with the higher priority.
+    /// Compares the priority of the two `Option<TileType>`s and returns the one with the greater priority.
     ///
     /// If both have equal priority, `left` is returned.
-    fn return_highest<'a>(left: &'a TileType, right: &'a TileType) -> &'a TileType {
-        match Self::cmp(left, right) {
+    fn return_greater_option<'a>(
+        left: &'a Option<TileType>,
+        right: &'a Option<TileType>,
+    ) -> &'a Option<TileType> {
+        match Self::cmp_option(left, right) {
+            std::cmp::Ordering::Greater => right,
+            std::cmp::Ordering::Equal => left,
+            std::cmp::Ordering::Less => left,
+        }
+    }
+
+    /// Compares the priority of the two `Option<TileType>`s and returns the one with the lesser priority.
+    ///
+    /// If both have equal priority, `left` is returned.
+    fn return_less_option<'a>(
+        left: &'a Option<TileType>,
+        right: &'a Option<TileType>,
+    ) -> &'a Option<TileType> {
+        match Self::cmp_option(left, right) {
             std::cmp::Ordering::Greater => left,
             std::cmp::Ordering::Equal => left,
             std::cmp::Ordering::Less => right,
