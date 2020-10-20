@@ -6,7 +6,9 @@ use std::hash::{Hash, Hasher};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 // Internal includes.
-use super::{MapId, PortalCollection, SubMapCollection, TileType};
+use super::{
+    MapId, PortalCollection, SubMapCollection, TileType, LOWEST_POSSIBLY_INVALID_MAP, VALID_MAPS,
+};
 use crate::geometry::*;
 
 lazy_static! {
@@ -15,6 +17,20 @@ lazy_static! {
 
 /// Call this to get an ID for a new [`Map`](trait.Map.html).
 pub fn get_new_map_id() -> MapId {
+    if *LOWEST_POSSIBLY_INVALID_MAP.read() < ATOMIC_ID.load(Ordering::Acquire) {
+        let mut lowest_possibly_invalid_map = LOWEST_POSSIBLY_INVALID_MAP.write();
+        let valid_maps = VALID_MAPS.write();
+        while *lowest_possibly_invalid_map < valid_maps.len() {
+            let mut valid_map = valid_maps[*lowest_possibly_invalid_map].write();
+            if !(*valid_map) {
+                *valid_map = true;
+                ATOMIC_ID.fetch_max(*lowest_possibly_invalid_map, Ordering::SeqCst);
+                return *lowest_possibly_invalid_map;
+            } else {
+                *lowest_possibly_invalid_map += 1;
+            }
+        }
+    }
     // We don't actually care in what order we receive the Id; only that we get a different one.
     // "Ordering::Relaxed" is sufficient for that.
     ATOMIC_ID.fetch_add(1, Ordering::Relaxed)
