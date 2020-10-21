@@ -50,8 +50,8 @@ impl HasSize for DummyMap {
     }
 }
 
-impl IntersectsPos for DummyMap {
-    fn intersects_pos(&self, _position: Position) -> bool {
+impl IntersectsPosition for DummyMap {
+    fn intersects_position(&self, _position: Position) -> bool {
         false
     }
 }
