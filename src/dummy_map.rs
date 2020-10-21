@@ -20,6 +20,14 @@ impl DummyMap {
     }
 }
 
+impl ContainsLocalPosition for DummyMap {
+    fn contains_local_position(&self, _position: Position) -> Containment {
+        Containment::Disjoint
+    }
+}
+
+impl ContainsPosition for DummyMap {}
+
 impl HasArea for DummyMap {
     fn area(&self) -> &Area {
         &self.area
