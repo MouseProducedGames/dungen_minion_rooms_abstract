@@ -50,11 +50,13 @@ impl HasSize for DummyMap {
     }
 }
 
-impl IntersectsPosition for DummyMap {
-    fn intersects_position(&self, _position: Position) -> bool {
+impl IntersectsLocalPosition for DummyMap {
+    fn intersects_local_position(&self, _position: Position) -> bool {
         false
     }
 }
+
+impl IntersectsPosition for DummyMap {}
 
 impl Map for DummyMap {
     fn box_clone(&self) -> Box<dyn Map> {
