@@ -92,8 +92,6 @@ impl Placed for DummyMap {}
 
 impl PlacedObject for DummyMap {}
 
-impl PlacedShape for DummyMap {}
-
 impl PortalCollection for DummyMap {
     fn add_portal(
         &mut self,
