@@ -153,7 +153,11 @@ impl PortalCollection for DummyMap {
     }
 }
 
-impl Shape for DummyMap {}
+impl Shape for DummyMap {
+    fn box_shape_clone(&self) -> Box<dyn Shape> {
+        Box::new((*self).clone())
+    }
+}
 
 impl SubMapCollection for DummyMap {
     fn add_sub_map(&mut self, _local_position: Position, _target: MapId) {}
