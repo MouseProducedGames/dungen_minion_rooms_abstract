@@ -38,6 +38,16 @@ impl HasArea for DummyMap {
     }
 }
 
+impl HasHeight for DummyMap {
+    fn height(&self) -> Length {
+        self.size().height()
+    }
+
+    fn height_mut(&mut self) -> &mut Length {
+        self.size_mut().height_mut()
+    }
+}
+
 impl HasPosition for DummyMap {
     fn position(&self) -> &Position {
         self.area.position()
@@ -55,6 +65,16 @@ impl HasSize for DummyMap {
 
     fn size_mut(&mut self) -> &mut Size {
         self.area.size_mut()
+    }
+}
+
+impl HasWidth for DummyMap {
+    fn width(&self) -> Length {
+        self.size().width()
+    }
+
+    fn width_mut(&mut self) -> &mut Length {
+        self.size_mut().width_mut()
     }
 }
 
