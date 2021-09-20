@@ -25,6 +25,7 @@ pub struct SubMaps<'a> {
 
 impl<'a> SubMaps<'a> {
     /// Creates a new immutable `SubMap` iterator.
+    #[must_use]
     pub fn new(values: &'a [SubMap]) -> Self {
         Self { values }
     }

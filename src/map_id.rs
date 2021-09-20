@@ -40,9 +40,9 @@ where
 /// A definition for `MapId`, so that the implementation can be more easily changed if needed or desired.
 pub type MapId = usize;
 
-/// Invalidates the specified map, allowing its MapId to be re-used.
+/// Invalidates the specified map, allowing its `MapId` to be re-used.
 ///
-/// This function should be used with care, and only when you are certain there are no other instances of the given MapId.
+/// This function should be used with care, and only when you are certain there are no other instances of the given `MapId`.
 pub fn invalidate_map(map_id: MapId) {
     let maps = MAPS.read();
     let valid_maps = VALID_MAPS.read();

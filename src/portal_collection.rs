@@ -4,7 +4,7 @@
 
 // Internal includes.
 use super::{MapId, Portal, Portals, PortalsMut};
-use crate::geometry::*;
+use crate::geometry::{CardinalDirection, Position};
 
 /// The defining trait of a type that has a collection of [`Portal`](struct.Portal.html)s.
 pub trait PortalCollection {

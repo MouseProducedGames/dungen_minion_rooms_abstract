@@ -4,7 +4,7 @@
 
 // Internal includes.
 use super::MapId;
-use crate::geometry::*;
+use crate::geometry::{CardinalDirection, Position};
 
 /// Contains information about a [`Map`](trait.Map.html) that can be reached from this `Portal`.
 ///
@@ -19,6 +19,7 @@ pub struct Portal {
 
 impl Portal {
     /// Creates a new `Portal` at a given local `Position`, where the `Map` is facing a specific `CardinalDirection` from the `Portal`'s perspective, with a specific end-point local `Position` on the target map.
+    #[must_use]
     pub fn new(
         local_position: Position,
         portal_to_map_facing: CardinalDirection,
@@ -34,42 +35,50 @@ impl Portal {
     }
 
     /// An immutable reference to the `Portal`'s local position on its `Map` of origin.
+    #[must_use]
     pub fn local_position(&self) -> &Position {
         &self.local_position
     }
 
     /// A mutable reference to the `Portal`'s local position on its `Map` of origin.
+    #[must_use]
     pub fn local_position_mut(&mut self) -> &mut Position {
         &mut self.local_position
     }
 
     /// An immutable reference to the `CardinalDirection` the map is facing, from the perspective of the portal.
+    #[must_use]
     pub fn portal_to_map_facing(&self) -> &CardinalDirection {
         &self.portal_to_map_facing
     }
 
     /// A mutable reference to the `CardinalDirection` the map is facing, from the perspective of the portal.
+    #[must_use]
     pub fn portal_to_map_facing_mut(&mut self) -> &mut CardinalDirection {
         &mut self.portal_to_map_facing
     }
 
     /// An immutable reference to the `Portal`'s local end-point on its target `Map`.
+    #[must_use]
     pub fn portal_to_map_position(&self) -> &Position {
         &self.portal_to_map_position
     }
 
     /// A mutable reference to the `Portal`'s local end-point on its target `Map`.
+    #[must_use]
     pub fn portal_to_map_position_mut(&mut self) -> &mut Position {
         &mut self.portal_to_map_position
     }
 
     /// An immutable reference to the `MapId` of the portal target.
+    #[must_use]
     pub fn target(&self) -> MapId {
         self.target
     }
 
     /// A mutable reference to the `MapId` of the portal target.
-    pub fn target_mut(&mut self) -> &MapId {
+    #[must_use]
+    pub fn target_mut(&mut self) -> &mut MapId {
         &mut self.target
     }
 }

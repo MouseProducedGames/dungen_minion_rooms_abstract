@@ -9,13 +9,16 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 use super::{
     MapId, PortalCollection, SubMapCollection, TileType, LOWEST_POSSIBLY_INVALID_MAP, VALID_MAPS,
 };
-use crate::geometry::*;
+use crate::geometry::{
+    CardinalRotation, HasHeight, HasWidth, IsPosition, Length, PlacedShape, Position,
+};
 
 lazy_static! {
     static ref ATOMIC_ID: AtomicUsize = AtomicUsize::new(0);
 }
 
 /// Call this to get an ID for a new [`Map`](trait.Map.html).
+#[must_use]
 pub fn get_new_map_id() -> MapId {
     if *LOWEST_POSSIBLY_INVALID_MAP.read() < ATOMIC_ID.load(Ordering::Acquire) {
         let mut lowest_possibly_invalid_map = LOWEST_POSSIBLY_INVALID_MAP.write();
@@ -26,9 +29,9 @@ pub fn get_new_map_id() -> MapId {
                 *valid_map = true;
                 ATOMIC_ID.fetch_max(*lowest_possibly_invalid_map, Ordering::SeqCst);
                 return *lowest_possibly_invalid_map;
-            } else {
-                *lowest_possibly_invalid_map += 1;
             }
+
+            *lowest_possibly_invalid_map += 1;
         }
     }
     // We don't actually care in what order we receive the Id; only that we get a different one.
@@ -45,10 +48,12 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
 
     /// Determines if the local `Position` is valid. Provides a default implementation.
     fn is_local_position_valid(&self, position: Position) -> bool {
+        // As this returns if a coordinate is less than zero, sign loss is not a problem.
+        #[allow(clippy::cast_sign_loss)]
         !(position.x() < 0
             || position.y() < 0
-            || position.x() >= self.size().width() as i32
-            || position.y() >= self.size().height() as i32)
+            || position.x() as Length >= self.size().width()
+            || position.y() as Length >= self.size().height())
     }
 
     /// Provides a very-likely unique u64 Id for a Map.
@@ -62,10 +67,10 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
     /// This method has a default implementation.
     fn tile_type_at(&self, position: Position) -> Option<TileType> {
         let local_position = position - *self.position();
-        if !self.is_local_position_valid(local_position) {
-            None
-        } else {
+        if self.is_local_position_valid(local_position) {
             self.tile_type_at_local(local_position)
+        } else {
+            None
         }
     }
 
@@ -74,10 +79,10 @@ pub trait Map: PlacedShape + PortalCollection + Send + Sync + SubMapCollection {
     /// This method has a default implementation.
     fn tile_type_at_mut(&mut self, position: Position) -> Option<&mut TileType> {
         let local_position = position - *self.position();
-        if !self.is_local_position_valid(local_position) {
-            None
-        } else {
+        if self.is_local_position_valid(local_position) {
             self.tile_type_at_local_mut(local_position)
+        } else {
+            None
         }
     }
 

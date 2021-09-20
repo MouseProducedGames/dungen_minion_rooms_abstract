@@ -25,6 +25,7 @@ pub struct Portals<'a> {
 
 impl<'a> Portals<'a> {
     /// Creates a new immutable `Portal` iterator.
+    #[must_use]
     pub fn new(values: &'a [Portal]) -> Self {
         Self { values }
     }

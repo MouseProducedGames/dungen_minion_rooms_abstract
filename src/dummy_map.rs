@@ -3,8 +3,15 @@
 // Standard includes.
 
 // Internal includes.
-use super::*;
-use crate::geometry::*;
+use super::{
+    Map, MapId, Portal, PortalCollection, Portals, PortalsMut, SubMap, SubMapCollection, SubMaps,
+    SubMapsMut, TileType,
+};
+use crate::geometry::{
+    Area, CardinalDirection, CardinalRotation, Containment, ContainsLocalPosition,
+    ContainsPosition, HasArea, HasHeight, HasPosition, HasSize, HasWidth, IntersectsLocalPosition,
+    IntersectsPosition, Length, Placed, PlacedObject, Position, Shape, ShapeIterator, Size,
+};
 
 /// A [`Map`](trait.Map.html) implementation intended for testing, and as a placeholder.
 #[derive(Clone)]
@@ -156,6 +163,14 @@ impl PortalCollection for DummyMap {
 impl Shape for DummyMap {
     fn box_shape_clone(&self) -> Box<dyn Shape> {
         Box::new((*self).clone())
+    }
+
+    fn is_empty(&self) -> bool {
+        self.area().is_empty()
+    }
+
+    fn iter(&self) -> ShapeIterator {
+        ShapeIterator::new(self)
     }
 }
 

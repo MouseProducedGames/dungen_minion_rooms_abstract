@@ -1,5 +1,7 @@
 #![warn(missing_docs)]
-#![warn(missing_doc_code_examples)]
+#![warn(rustdoc::missing_doc_code_examples)]
+#![warn(clippy::all, clippy::pedantic)]
+#![cfg_attr(feature = "strict", deny(warnings))]
 
 //! Defines various map and dungeon generation enums, structs, and traits (mostly traits) for the `dungen_minion` crate.
 //!
@@ -9,8 +11,7 @@
 #[macro_use]
 extern crate lazy_static;
 
-#[allow(missing_docs)]
-#[allow(missing_doc_code_examples)]
+/// Provides geometry for the `dungen_minion` system of crates.
 pub mod geometry {
     pub use dungen_minion_geometry::*;
 }
