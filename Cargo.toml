@@ -14,7 +14,7 @@ readme = "readme.md"
 [dependencies]
 dungen_minion_geometry = "0.3.1"
 lazy_static = "1.4.0"
-parking_lot = "0.11.0"
+parking_lot = "0.11.2"
 
 [features]
 strict = []
